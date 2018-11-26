@@ -7,9 +7,9 @@ public class Admin {
         Scanner sc = new Scanner(System.in);
         int choice = sc.nextInt();
         switch(choice) {
-            case 1: addUser();
+            case 1: //addUser();
             break;
-            case 2: deleteUser();
+            case 2: //deleteUser();
             break;
             case 3:
             break;

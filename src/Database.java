@@ -32,7 +32,17 @@ public class Database {
         return connect = DriverManager.getConnection(getUrl(), "root", "");
     }
 
-    public static void userLogin(String u, String p) {
+    public static int userLogin() {
+
+        int isLogin = 0;
+
+        Database.connectToDatabase();
+        Scanner login = new Scanner(System.in);
+
+        System.out.println("Brugernavn: ");
+        String u = login.nextLine();
+        System.out.println("Kodeord: ");
+        String p = login.nextLine();
 
         try {
 
@@ -45,11 +55,16 @@ public class Database {
                 String password = rs.getString("password");
                 String name = rs.getString("name");
                 String role = rs.getString("role");
-
+                if (u.equals(username) && p.equals(password)) {
+                    isLogin = 1;
+                } else {
+                    isLogin = 0;
+                }
             }
+
         } catch (SQLException e) {
             System.out.println("Fejl med databasen.");
         }
-
+        return isLogin;
     }
 }

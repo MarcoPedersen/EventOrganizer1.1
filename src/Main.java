@@ -3,14 +3,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Database.connectToDatabase();
-        Scanner login = new Scanner(System.in);
+        Database.userLogin();
 
-        System.out.println("Brugernavn: ");
-        String u = login.nextLine();
-        System.out.println("Kodeord: ");
-        String p = login.nextLine();
-
-        Database.userLogin(u, p);
     }
 }
