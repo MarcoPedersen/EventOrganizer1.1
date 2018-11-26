@@ -29,7 +29,7 @@ public class Secretary extends User{
                 id = arrScanner.nextInt();
 
                 try {
-                    a.makeArrangement(id, aDuration, name, type, description, additionalInfo);
+                    a.viewArrangement(id, aDuration, name, type, description, additionalInfo);
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
                 }

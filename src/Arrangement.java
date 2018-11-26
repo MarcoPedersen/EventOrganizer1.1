@@ -31,4 +31,12 @@ public class Arrangement {
 
     }
 
+    public static void viewArrangement(int id, String arrangementDuration, String name, String type, String description, String additionalInfo) throws SQLException {
+        String sql = "SELECT FROM `arrangement`(`id`, `arrangementDuration`, `name`, `type`,`description`,`additionalInfo` )";
+
+        st = Database.getConnect().createStatement();
+        st.execute(sql);
+        st.close();
+
+    }
 }
