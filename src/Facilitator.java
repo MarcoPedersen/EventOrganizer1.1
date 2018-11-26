@@ -1,2 +1,8 @@
-public class Facilitator {
+public class Facilitator extends User {
+
+    public static void facilitatorLogin() {
+
+    }
+
+
 }
