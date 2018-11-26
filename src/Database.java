@@ -15,7 +15,7 @@ public class Database {
 
     public static String getUrl() {
         String url;
-        return url = "jdbc:mysql://localhost:3306/event?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
+        return url = "jdbc:mysql://212.237.138.123:3306/thomas?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
     }
 
     public static void connectToDatabase() {
@@ -23,30 +23,31 @@ public class Database {
         try {
             st = getConnect().createStatement();
         } catch (SQLException e) {
+
             System.out.println(e.getMessage());
         }
     }
 
     public static Connection getConnect() throws SQLException {
         String url = getUrl();
-        return connect = DriverManager.getConnection(getUrl(), "root", "");
+        return connect = DriverManager.getConnection(getUrl(), "thomas", "123456");
     }
 
     public static int userLogin() {
 
         int isLogin = 0;
 
-        Database.connectToDatabase();
-        Scanner login = new Scanner(System.in);
-
-        System.out.println("Brugernavn: ");
-        String u = login.nextLine();
-        System.out.println("Kodeord: ");
-        String p = login.nextLine();
-
         try {
 
-            String query = "SELECT * FROM users WHERE username='"+ u + "' and password='"+ p +"'";
+            Scanner login = new Scanner(System.in);
+
+            System.out.println("Brugernavn: ");
+            String u = login.nextLine();
+            System.out.println("Kodeord: ");
+            String p = login.nextLine();
+
+            connectToDatabase();
+            String query = "SELECT * FROM user WHERE username='"+ u + "' and password='"+ p +"'";
             rs = st.executeQuery(query);
 
             if (rs.next()) {
