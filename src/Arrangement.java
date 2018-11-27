@@ -62,12 +62,9 @@ public class Arrangement {
         Arrangement arrangement = new Arrangement(aName, aStart, aEnd, aPrice, attendees);
 
         return arrangement;
-
-
-
     }
 
-    public static void editArrangement(String i) throws SQLException {
+    public Arrangement editArrangement() {
 
         System.out.println("Skriv de nye informationer:");
         System.out.println("-----------------------------");
@@ -84,20 +81,14 @@ public class Arrangement {
         System.out.println("Tilmeldte: ");
         String Attendees = arrScanner.nextLine();
 
-        String sql =    "UPDATE `arrangement` SET `aName`='"+ Name + "', `aStart`='" + Start +"', `aEnd`='"+ End + "', `aPrice`='"
-                        + Price + "',`attendees`='"+ Attendees + "' WHERE `aName`='"+ i +"'";
-        Database.getConnect();
-        st = Database.getConnect().createStatement();
-        st.executeUpdate(sql);
-        System.out.println("Dit arrangement er nu redigeret.");
-        Secretary.secretaryLogin();
-        st.close();
+        Arrangement arrangement = new Arrangement(Name, Start, End, Price, Attendees);
+
+        return arrangement;
     }
 
-    public static void deleteArrangement(String i) throws SQLException {
+    public void deleteArrangement(String i) throws SQLException {
 
         String sql = "DELETE FROM arrangement WHERE aName='"+ i + "'";
-        getArrangements();
         st = Database.getConnect().createStatement();
         st.execute(sql);
         System.out.println("Dit arrangement er nu slettet.");
