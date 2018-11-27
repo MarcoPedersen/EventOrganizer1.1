@@ -3,47 +3,47 @@ import java.util.Scanner;
 
 public class Arrangement {
 
-    private int id;
-    private int arrangementDuration;
     private String name;
-    private String type;
-    private String description;
-    private String additionalInfo;
+    private String start;
+    private String end;
+    private String price;
+    private String attendees;
     private static Statement st;
     private static ResultSet rs;
 
-    public Arrangement(int id, int arrangementDuration, String name, String type, String description, String additionalInfo) {
-        this.id = id;
-        this.arrangementDuration = arrangementDuration;
+    public Arrangement(String name, String start, String end, String price, String attendees) {
         this.name = name;
-        this.type = type;
-        this.description = description;
-        this.additionalInfo = additionalInfo;
-    }
-    public int getId() {
-
-        return id;
+        this.start = start;
+        this.end = end;
+        this.price = price;
+        this.attendees = attendees;
     }
 
-    public int getArrangementDuration() {
-        return arrangementDuration;
+    public Arrangement() {
+
     }
 
     public String getName() {
         return name;
     }
 
-    public String getType() {
-        return type;
-    }
-    public String getDescription() {
-        return description;
-    }
-    public String getAdditionalInfo() {
-        return additionalInfo;
+    public String getStart() {
+        return start;
     }
 
-    public static void makeArrangement() throws SQLException {
+    public String getEnd() {
+        return end;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getAttendees() {
+        return attendees;
+    }
+
+    public Arrangement makeArrangement() {
 
         System.out.println("Udfyld felterne:");
         Scanner arrScanner = new Scanner(System.in);
@@ -59,14 +59,11 @@ public class Arrangement {
         System.out.println("Tilmeldte: ");
         String attendees = arrScanner.nextLine();
 
-        String sql =    "INSERT INTO `arrangement`(`id`, `aName`, `aStart`, `aEnd`, `aPrice`,`attendees`) VALUES (null, \""
-                        + aName + "\", \"" + aStart + "\", \"" + aEnd + "\", \"" + aPrice + "\", \"" + attendees + "\")";
+        Arrangement arrangement = new Arrangement(aName, aStart, aEnd, aPrice, attendees);
 
-        st = Database.getConnect().createStatement();
-        st.execute(sql);
-        System.out.println("Dit arrangement er nu oprettet.");
-        Secretary.secretaryLogin();
-        st.close();
+        return arrangement;
+
+
 
     }
 

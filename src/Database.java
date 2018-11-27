@@ -99,4 +99,26 @@ public class Database {
         }
 
     }
+
+    public static void arrangementToDatabase() {
+    try {
+        Arrangement arrangement = new Arrangement();
+
+        Arrangement arr1 = arrangement.makeArrangement();
+
+
+
+        String sql =    "INSERT INTO `arrangement`(`id`, `aName`, `aStart`, `aEnd`, `aPrice`,`attendees`) VALUES (null, \""
+                + arr1.getName() + "\", \"" + arr1.getStart() + "\", \"" + arr1.getEnd() + "\", \"" + arr1.getPrice() + "\", \"" + arr1.getAttendees() + "\")";
+
+        st = Database.getConnect().createStatement();
+        st.execute(sql);
+        System.out.println("Dit arrangement er nu oprettet.");
+        Secretary.secretaryLogin();
+        st.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    }
 }

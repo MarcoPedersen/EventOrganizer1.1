@@ -5,12 +5,12 @@ import java.util.Date;
 
 public class Secretary extends User{
 
-    private static Arrangement a;
 
     public static void secretaryLogin() {
         System.out.println("1. Arrangement menu \t 2. Event menu \t 3. Exporter CSV-fil 4. Afslut program");
         Scanner menu = new Scanner(System.in);
         int menuChoice = menu.nextInt();
+        Arrangement arrangement = new Arrangement();
         if(menuChoice == 1) {
 
                 System.out.println("1. Tilføj arrangement \t 2. Rediger arrangement \t 3. Slet arrangement");
@@ -18,20 +18,16 @@ public class Secretary extends User{
                 int userChoice = choice.nextInt();
                 switch (userChoice) {
                     case 1:
-                        try {
-                            a.makeArrangement();
-                        } catch (SQLException e) {
-                            System.out.println(e.getMessage());
-                        }
+                        Database.arrangementToDatabase();
                         break;
 
                     case 2:
                         System.out.println("Vælg hvilket arrangement du vil redigere:");
-                        a.getArrangements();
+                        arrangement.getArrangements();
                         Scanner edit = new Scanner(System.in);
                         String i = edit.nextLine();
                         try {
-                            a.editArrangement(i.toLowerCase());
+                            arrangement.editArrangement(i.toLowerCase());
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
@@ -39,11 +35,11 @@ public class Secretary extends User{
 
                     case 3:
                         System.out.println("Vælg hvilket arrangement du vil slette:");
-                        a.getArrangements();
+                        arrangement.getArrangements();
                         Scanner delete = new Scanner(System.in);
                         String j = delete.nextLine();
                         try {
-                            a.deleteArrangement(j.toLowerCase());
+                            arrangement.deleteArrangement(j.toLowerCase());
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
