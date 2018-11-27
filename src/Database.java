@@ -114,7 +114,6 @@ public class Database {
             String sql =    "UPDATE `arrangement` SET `aName`='"+ arr1.getName() + "', `aStart`='" + arr1.getStart() +"', `aEnd`='"+ arr1.getEnd() + "', `aPrice`='"
                     + arr1.getPrice() + "',`attendees`='"+ arr1.getAttendees() + "' WHERE `aName`='"+ i +"'";
 
-
             st = Database.getConnect().createStatement();
             st.executeUpdate(sql);
             System.out.println("Dit arrangement er nu redigeret.");
