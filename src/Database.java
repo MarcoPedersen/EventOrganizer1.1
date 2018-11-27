@@ -158,7 +158,7 @@ public class Database {
             System.out.println("Dit arrangement er nu redigeret.");
             Secretary.secretaryLogin();
             st.close();
-        } catch(SQLException s){
+        } catch(SQLException s) {
             s.printStackTrace();
         }
     }

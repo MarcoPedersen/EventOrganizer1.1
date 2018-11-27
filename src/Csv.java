@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Csv {
 
-    public static void exportArrangement(){
+    public static void exportArrangement() {
 
         try {
             try {
@@ -45,6 +45,7 @@ public class Csv {
             e.printStackTrace();
         }
     }
+
     public static void exportEvent() {
 
         try {
