@@ -12,10 +12,32 @@ public class Database {
     private static ResultSet rs;
     private static Secretary s;
     private static Facilitator f;
+    private static Admin a;
+    private static Customer c;
+    private static String username;
+    private static String password;
+    private static String name;
+    private static String role;
 
     public static String getUrl() {
-        String url;
+        final String url;
         return url = "jdbc:mysql://212.237.138.123:3306/thomas?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
+    }
+
+    public static String getUsername() {
+        return username;
+    }
+
+    public static String getPassword() {
+        return password;
+    }
+
+    public static String getName() {
+        return name;
+    }
+
+    public static String getRole() {
+        return role;
     }
 
     public static void connectToDatabase() {
@@ -23,49 +45,58 @@ public class Database {
         try {
             st = getConnect().createStatement();
         } catch (SQLException e) {
-
             System.out.println(e.getMessage());
         }
     }
 
     public static Connection getConnect() throws SQLException {
         String url = getUrl();
-        return connect = DriverManager.getConnection(getUrl(), "thomas", "123456");
+        return connect = DriverManager.getConnection(url, "thomas", "123456");
     }
 
-    public static int userLogin() {
 
-        int isLogin = 0;
+    public static void userLogin(String u, String p) {
 
         try {
 
-            Scanner login = new Scanner(System.in);
-
-            System.out.println("Brugernavn: ");
-            String u = login.nextLine();
-            System.out.println("Kodeord: ");
-            String p = login.nextLine();
-
-            connectToDatabase();
-            String query = "SELECT * FROM user WHERE username='"+ u + "' and password='"+ p +"'";
+            String query = "SELECT * FROM users WHERE username='"+ u + "' and password='"+ p +"'";
             rs = st.executeQuery(query);
 
             if (rs.next()) {
 
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                String name = rs.getString("name");
-                String role = rs.getString("role");
+                username = rs.getString("username");
+                password = rs.getString("password");
+                name = rs.getString("name");
+                role = rs.getString("role");
+
                 if (u.equals(username) && p.equals(password)) {
-                    isLogin = 1;
+                    System.out.println("Velkommen, " + name + ". Din rolle er: " + role);
+
+                    switch (role) {
+                        case "Secretary":
+                            s.secretaryLogin();
+                        break;
+
+                        case "Facilitator":
+                            f.facilitatorLogin();
+                        break;
+                        case "Customer":
+                            c.customerLogin(name);
+                        break;
+                        case "Admin":
+                            a.adminLogin();
+                        break;
+                        default: System.out.println("Fejl med login.");
+                        break;
+                    }
+
                 } else {
-                    isLogin = 0;
+                    System.out.println("Forkert brugernavn eller kodeord.");
                 }
             }
-
         } catch (SQLException e) {
             System.out.println("Fejl med databasen.");
         }
-        return isLogin;
+
     }
 }
