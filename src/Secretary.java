@@ -1,53 +1,105 @@
-import javax.net.ssl.SSLException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.Date;
 
 public class Secretary extends User{
 
-    private static Arrangement a;
 
     public static void secretaryLogin() {
-        System.out.println("1. Tilføj arrangement \t 2. Rediger arrangement \t 3. Slet arrangement");
-        Scanner choice = new Scanner(System.in);
-        int userChoice = choice.nextInt();
-        switch (userChoice) {
-            case 1:
-                System.out.println("Udfyld felterne:");
-                Scanner arrScanner = new Scanner(System.in);
+        System.out.println("1. Arrangement menu \t 2. Event menu \t 3. Exporter CSV-fil 4. Afslut program");
+        Scanner menu = new Scanner(System.in);
+        int menuChoice = menu.nextInt();
+        Arrangement arrangement = new Arrangement();
+        if(menuChoice == 1) {
 
-                System.out.println("Navn på arrangement: ");
-                name = arrScanner.nextLine();
-                System.out.println("Arrangement type: ");
-                type = arrScanner.nextLine();
-                System.out.println("Beskrivelse: ");
-                description = arrScanner.nextLine();
-                System.out.println("Varighed: ");
-                aDuration = arrScanner.nextLine();
-                   System.out.println("Anden info: ");
-                additionalInfo = arrScanner.nextLine();
-                System.out.println("id: ");
-                id = arrScanner.nextInt();
+                System.out.println("1. Tilføj arrangement \t 2. Rediger arrangement \t 3. Slet arrangement");
+                Scanner choice = new Scanner(System.in);
+                int userChoice = choice.nextInt();
+                switch (userChoice) {
+                    case 1:
+                        Database.arrangementToDatabase();
+                        break;
 
-                try {
-                    a.viewArrangement(id, aDuration, name, type, description, additionalInfo);
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
+                    case 2:
+                        System.out.println("Vælg hvilket arrangement du vil redigere:");
+                        arrangement.getArrangements();
+                        Scanner edit = new Scanner(System.in);
+                        String i = edit.nextLine();
+                        try {
+                            arrangement.editArrangement(i.toLowerCase());
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+
+                    case 3:
+                        System.out.println("Vælg hvilket arrangement du vil slette:");
+                        arrangement.getArrangements();
+                        Scanner delete = new Scanner(System.in);
+                        String j = delete.nextLine();
+                        try {
+                            arrangement.deleteArrangement(j.toLowerCase());
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+
+                    default:
+                        System.out.println("prøv igen");
+                        break;
                 }
+        } else if(menuChoice == 2) {
+                System.out.println("1. Tilføj event \t 2. Rediger event \t 3. Slet event");
+                Scanner Choice = new Scanner(System.in);
+                int eChoice = Choice.nextInt();
+                switch (eChoice) {
+                    case 1:
+                        try {
+                            Event.makeEvent();
+                        } catch (SQLException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
 
-                break;
+                    case 2:
+                        System.out.println("Vælg hvilket event du vil redigere:");
+                        Event.getEvent();
+                        Scanner edit = new Scanner(System.in);
+                        String i = edit.nextLine();
+                        try {
+                            Event.editEvent(i);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        break;
 
 
-            case 2:
-                System.out.println("test2");
-                break;
+                    case 3:
+                        System.out.println("Vælg hvilket event du vil slette:");
+                        Event.getEvent();
+                        Scanner delete = new Scanner(System.in);
+                        String j = delete.nextLine();
+                        try {
+                            Event.deleteEvent(j.toLowerCase());
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        break;
 
-            case 3:
-                System.out.println("test3");
-                break;
+                    default:
+                        System.out.println("Noget gik galt");
+                }
+            } else if(menuChoice == 3) {
 
-            default:
-                System.out.println("prøv igen");
-                break;
+                Csv.exportArrangement();
+                Csv.exportEvent();
+                Csv.exportUsers();
+
+            } else {
+                System.out.println("Programmet lukker ned...");
+                System.exit(0);
+            }
         }
     }
-}
+
