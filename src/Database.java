@@ -10,15 +10,12 @@ public class Database {
     private static Connection connect;
     private static Statement st;
     private static ResultSet rs;
-    private static Secretary s;
-    private static Facilitator f;
-    private static Admin a;
-    private static Customer c;
     private static String username;
     private static String password;
     private static String name;
     private static String role;
     private static Arrangement arrangement = new Arrangement();
+    private static Event event = new Event();
 
     public static String getUrl() {
         final String url;
@@ -75,17 +72,17 @@ public class Database {
 
                     switch (role) {
                         case "Secretary":
-                            s.secretaryLogin();
+                            Secretary.secretaryLogin();
                         break;
 
                         case "Facilitator":
-                            f.facilitatorLogin();
+                            Facilitator.facilitatorLogin();
                         break;
                         case "Customer":
-                            c.customerLogin(name);
+                            Customer.customerLogin(name);
                         break;
                         case "Admin":
-                            a.adminLogin();
+                            Admin.adminLogin();
                         break;
                         default: System.out.println("Fejl med login.");
                         break;
@@ -139,19 +136,42 @@ public class Database {
         }
     }
 
-    public static void deleteArrangementFromDatabase() {
-
-    }
 
     public static void eventToDatabase() {
+        Event event1 = event.makeEvent();
+
+        try {
+
+            String sql =    "INSERT INTO `event`(`id`, `eName`, `eDescription`, `eType`,`eFacilitator`,`eText`,`arrangement`) " +
+                    "VALUES (null, \"" + event1.geteName() + "\", \"" + event1.geteDescription() + "\", \"" + event1.geteType() + "\", \"" + event1.geteFacilitator() +
+                    "\", \"" + event1.geteText()+ "\", \"" + event1.getArrangement() + "\")";
+
+            st = Database.getConnect().createStatement();
+            st.execute(sql);
+            System.out.println("Dit event er nu oprettet og hører til arrangementet: " + event1.getArrangement());
+            Secretary.secretaryLogin();
+            st.close();
+        } catch (SQLException s){
+            s.printStackTrace();
+        }
 
     }
 
-    public static void editEventInDatabase() {
+    public static void editEventInDatabase(String i) {
+        Event e = event.editEvent();
+        try {
+            String sql =    "UPDATE `event` SET `eName`='"+ e.geteName() + "', `eDescription`='" + e.geteDescription() +"', `eType`='"+ e.geteType()
+                    + "', `eFacilitator`='" + e.geteFacilitator() + "',`eText`='"+ e.geteText() + "', `arrangement`='" + e.getArrangement()
+                    + "' WHERE `eName`='"+ i +"'";
 
-    }
-
-    public static void deleteEventFromDatabase() {
-
+            Database.getConnect();
+            st = Database.getConnect().createStatement();
+            st.executeUpdate(sql);
+            System.out.println("Dit arrangement er nu redigeret.");
+            Secretary.secretaryLogin();
+            st.close();
+        } catch(SQLException s){
+            s.printStackTrace();
+        }
     }
 }

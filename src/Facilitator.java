@@ -77,4 +77,20 @@ public class Facilitator extends User {
             e.printStackTrace();
         }
     }
+
+    public static void getFacilitator() {
+        try {
+            String query = "SELECT * FROM users WHERE role='Facilitator'";
+            st = Database.getConnect().createStatement();
+            rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                String name = rs.getString("name");
+                System.out.println("-----------------");
+                System.out.println(name);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

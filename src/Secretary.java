@@ -51,11 +51,7 @@ public class Secretary extends User{
                 int eChoice = Choice.nextInt();
                 switch (eChoice) {
                     case 1:
-                        try {
-                            Event.makeEvent();
-                        } catch (SQLException e) {
-                            System.out.println(e.getMessage());
-                        }
+                        Database.eventToDatabase();
                         break;
 
                     case 2:
@@ -63,11 +59,7 @@ public class Secretary extends User{
                         Event.getEvent();
                         Scanner edit = new Scanner(System.in);
                         String i = edit.nextLine();
-                        try {
-                            Event.editEvent(i);
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
+                        Database.editEventInDatabase(i);
                         break;
 
 
