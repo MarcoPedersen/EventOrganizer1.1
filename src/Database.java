@@ -3,10 +3,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
-import java.util.Scanner;
 
 public class Database {
 
+    private static final String URL = "jdbc:mysql://212.237.138.123:3306/thomas?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
     private static Connection connect;
     private static Statement st;
     private static ResultSet rs;
@@ -18,25 +18,13 @@ public class Database {
     private static Event event = new Event();
 
     public static String getUrl() {
-        final String url;
-        return url = "jdbc:mysql://212.237.138.123:3306/thomas?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
-    }
-
-    public static String getUsername() {
-        return username;
-    }
-
-    public static String getPassword() {
-        return password;
+        return URL;
     }
 
     public static String getName() {
         return name;
     }
 
-    public static String getRole() {
-        return role;
-    }
 
     public static void connectToDatabase() {
 
@@ -48,8 +36,9 @@ public class Database {
     }
 
     public static Connection getConnect() throws SQLException {
-        String url = getUrl();
-        return connect = DriverManager.getConnection(url, "thomas", "123456");
+
+        return connect = DriverManager.getConnection(getUrl(), "thomas", "123456");
+
     }
 
 
@@ -82,7 +71,7 @@ public class Database {
                             Customer.customerLogin(name);
                         break;
                         case "Admin":
-                            Admin.adminLogin();
+                            User.adminLogin();
                         break;
                         default: System.out.println("Fejl med login.");
                         break;
