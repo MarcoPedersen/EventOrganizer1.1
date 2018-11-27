@@ -23,14 +23,10 @@ public class Secretary extends User{
 
                     case 2:
                         System.out.println("Vælg hvilket arrangement du vil redigere:");
-                        arrangement.getArrangements();
+                        Arrangement.getArrangements();
                         Scanner edit = new Scanner(System.in);
                         String i = edit.nextLine();
-                        try {
-                            arrangement.editArrangement(i.toLowerCase());
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
+                        Database.editArrangementInDatabase(i);
                         break;
 
                     case 3:

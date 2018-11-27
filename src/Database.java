@@ -18,6 +18,7 @@ public class Database {
     private static String password;
     private static String name;
     private static String role;
+    private static Arrangement arrangement = new Arrangement();
 
     public static String getUrl() {
         final String url;
@@ -102,11 +103,8 @@ public class Database {
 
     public static void arrangementToDatabase() {
     try {
-        Arrangement arrangement = new Arrangement();
 
         Arrangement arr1 = arrangement.makeArrangement();
-
-
 
         String sql =    "INSERT INTO `arrangement`(`id`, `aName`, `aStart`, `aEnd`, `aPrice`,`attendees`) VALUES (null, \""
                 + arr1.getName() + "\", \"" + arr1.getStart() + "\", \"" + arr1.getEnd() + "\", \"" + arr1.getPrice() + "\", \"" + arr1.getAttendees() + "\")";
@@ -119,6 +117,41 @@ public class Database {
     } catch (SQLException e) {
         e.printStackTrace();
     }
+
+    }
+
+    public static void editArrangementInDatabase(String i) {
+        try {
+
+            Arrangement arr1 = arrangement.editArrangement();
+
+            String sql =    "UPDATE `arrangement` SET `aName`='"+ arr1.getName() + "', `aStart`='" + arr1.getStart() +"', `aEnd`='"+ arr1.getEnd() + "', `aPrice`='"
+                    + arr1.getPrice() + "',`attendees`='"+ arr1.getAttendees() + "' WHERE `aName`='"+ i +"'";
+
+
+            st = Database.getConnect().createStatement();
+            st.executeUpdate(sql);
+            System.out.println("Dit arrangement er nu redigeret.");
+            Secretary.secretaryLogin();
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteArrangementFromDatabase() {
+
+    }
+
+    public static void eventToDatabase() {
+
+    }
+
+    public static void editEventInDatabase() {
+
+    }
+
+    public static void deleteEventFromDatabase() {
 
     }
 }
