@@ -16,6 +16,7 @@ public class Database {
     private static String role;
     private static Arrangement arrangement = new Arrangement();
     private static Event event = new Event();
+    private static Admin admin = new Admin();
 
     public static String getUrl() {
         return URL;
@@ -71,7 +72,7 @@ public class Database {
                             Customer.customerLogin(name);
                         break;
                         case "Admin":
-                            User.adminLogin();
+                            Admin.adminLogin();
                         break;
                         default: System.out.println("Fejl med login.");
                         break;
@@ -90,16 +91,16 @@ public class Database {
     public static void arrangementToDatabase() {
     try {
 
-        Arrangement arr1 = arrangement.makeArrangement();
+        Arrangement a = arrangement.newArrangement();
 
         String sql =    "INSERT INTO `arrangement`(`id`, `aName`, `aStart`, `aEnd`, `aPrice`,`attendees`) VALUES (null, \""
-                + arr1.getName() + "\", \"" + arr1.getStart() + "\", \"" + arr1.getEnd() + "\", \"" + arr1.getPrice() + "\", \"" + arr1.getAttendees() + "\")";
+                + a.getName() + "\", \"" + a.getStart() + "\", \"" + a.getEnd() + "\", \"" + a.getPrice() + "\", \"" + a.getAttendees() + "\")";
 
         st = Database.getConnect().createStatement();
         st.execute(sql);
         System.out.println("Dit arrangement er nu oprettet.");
-        Secretary.secretaryLogin();
         st.close();
+        Secretary.secretaryLogin();
     } catch (SQLException e) {
         e.printStackTrace();
     }
@@ -109,16 +110,16 @@ public class Database {
     public static void editArrangementInDatabase(String i) {
         try {
 
-            Arrangement arr1 = arrangement.editArrangement();
+            Arrangement a = arrangement.newArrangement();
 
-            String sql =    "UPDATE `arrangement` SET `aName`='"+ arr1.getName() + "', `aStart`='" + arr1.getStart() +"', `aEnd`='"+ arr1.getEnd() + "', `aPrice`='"
-                    + arr1.getPrice() + "',`attendees`='"+ arr1.getAttendees() + "' WHERE `aName`='"+ i +"'";
+            String sql =    "UPDATE `arrangement` SET `aName`='"+ a.getName() + "', `aStart`='" + a.getStart() +"', `aEnd`='"+ a.getEnd() + "', `aPrice`='"
+                    + a.getPrice() + "',`attendees`='"+ a.getAttendees() + "' WHERE `aName`='"+ i +"'";
 
             st = Database.getConnect().createStatement();
             st.executeUpdate(sql);
             System.out.println("Dit arrangement er nu redigeret.");
-            Secretary.secretaryLogin();
             st.close();
+            Secretary.secretaryLogin();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -126,19 +127,18 @@ public class Database {
 
 
     public static void eventToDatabase() {
-        Event event1 = event.makeEvent();
-
+        Event e = event.newEvent();
         try {
 
             String sql =    "INSERT INTO `event`(`id`, `eName`, `eDescription`, `eType`,`eFacilitator`,`eText`,`arrangement`) " +
-                    "VALUES (null, \"" + event1.geteName() + "\", \"" + event1.geteDescription() + "\", \"" + event1.geteType() + "\", \"" + event1.geteFacilitator() +
-                    "\", \"" + event1.geteText()+ "\", \"" + event1.getArrangement() + "\")";
+                    "VALUES (null, \"" + e.geteName() + "\", \"" + e.geteDescription() + "\", \"" + e.geteType() + "\", \"" + e.geteFacilitator() +
+                    "\", \"" + e.geteText()+ "\", \"" + e.getArrangement() + "\")";
 
             st = Database.getConnect().createStatement();
             st.execute(sql);
-            System.out.println("Dit event er nu oprettet og hører til arrangementet: " + event1.getArrangement());
-            Secretary.secretaryLogin();
+            System.out.println("Dit event er nu oprettet og hører til arrangementet: " + e.getArrangement());
             st.close();
+            Secretary.secretaryLogin();
         } catch (SQLException s){
             s.printStackTrace();
         }
@@ -146,7 +146,7 @@ public class Database {
     }
 
     public static void editEventInDatabase(String i) {
-        Event e = event.editEvent();
+        Event e = event.newEvent();
         try {
             String sql =    "UPDATE `event` SET `eName`='"+ e.geteName() + "', `eDescription`='" + e.geteDescription() +"', `eType`='"+ e.geteType()
                     + "', `eFacilitator`='" + e.geteFacilitator() + "',`eText`='"+ e.geteText() + "', `arrangement`='" + e.getArrangement()
@@ -156,10 +156,43 @@ public class Database {
             st = Database.getConnect().createStatement();
             st.executeUpdate(sql);
             System.out.println("Dit arrangement er nu redigeret.");
-            Secretary.secretaryLogin();
             st.close();
+            Secretary.secretaryLogin();
         } catch(SQLException s) {
             s.printStackTrace();
         }
+    }
+
+    public static void userToDatabase() {
+
+        Admin a = admin.newUser();
+
+        try {
+            String sql = "INSERT INTO `users`(`id`, `username`, `password`, `name`,`role`) VALUES (null, \"" + a.getUsername() + "\", \"" + a.getPassword() + "\", \"" + a.getFullName() + "\", \"" + a.getRole() + "\")";
+
+            st = Database.getConnect().createStatement();
+            st.execute(sql);
+            System.out.println("Bruger " + a.getUsername() + " er nu oprettet.");
+            st.close();
+            Admin.adminLogin();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void editUserInDatabase(String i) {
+        Admin a = admin.newUser();
+        try {
+            String sql = "UPDATE `users` SET `username`='"+ a.getUsername() + "', `password`='" + a.getPassword() +"', `name`='"+ a.getFullName() + "', `role`='" + a.getRole() + "' WHERE `username`='"+ i +"'";
+            Database.getConnect();
+            st = Database.getConnect().createStatement();
+            st.executeUpdate(sql);
+            System.out.println("Brugeroplysningerne er nu opdateret.");
+            st.close();
+            Admin.adminLogin();
+        } catch (SQLException s) {
+            s.printStackTrace();
+        }
+
     }
 }

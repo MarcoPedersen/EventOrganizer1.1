@@ -49,7 +49,7 @@ public class Event {
         return arrangement;
     }
 
-    public Event makeEvent() {
+    public Event newEvent() {
 
         System.out.println("Udfyld felterne:");
         Scanner arrScanner = new Scanner(System.in);
@@ -73,32 +73,6 @@ public class Event {
 
     }
 
-    public Event editEvent(){
-
-        System.out.println("Skriv de nye informationer:");
-        System.out.println("-----------------------------");
-        Scanner arrScanner = new Scanner(System.in);
-
-        System.out.println("Navn på eventet: ");
-        String Name = arrScanner.nextLine();
-        System.out.println("Beskrivelse af eventet: ");
-        String description = arrScanner.nextLine();
-        System.out.println("Event type: ");
-        String type = arrScanner.nextLine();
-        System.out.println("Vælg ansvarlig facilitator: ");
-        Facilitator.getFacilitator();
-        String facilitator = arrScanner.nextLine();
-        System.out.println("Ekstra informationer: ");
-        String text = arrScanner.nextLine();
-        System.out.println("Vælg et arrangement som eventet skal tilføjes til: ");
-        Arrangement.getArrangements();
-        String arrangement = arrScanner.nextLine();
-
-        Event e = new Event(Name, description, type, facilitator, text, arrangement);
-        return e;
-
-    }
-
     public static void deleteEvent(String i) throws SQLException {
 
         String sql = "DELETE FROM event WHERE eName='"+ i + "'";
@@ -106,8 +80,8 @@ public class Event {
         st = Database.getConnect().createStatement();
         st.execute(sql);
         System.out.println("Dit event er nu slettet.");
-        Secretary.secretaryLogin();
         st.close();
+        Secretary.secretaryLogin();
     }
 
     public static void getEvent() {

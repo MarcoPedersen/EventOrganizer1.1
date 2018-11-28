@@ -1,9 +1,7 @@
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;
-import java.util.Date;
 
-public class Secretary extends User{
+public class Secretary extends User {
 
 
     public static void secretaryLogin() {
