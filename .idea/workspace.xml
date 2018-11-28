@@ -3,25 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6b538ff0-4f97-437e-9bb2-dd141919d1f9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EventOrganizer/Arrangement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EventOrganizer/Arrangement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EventOrganizer/Attendee.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EventOrganizer/Customer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EventOrganizer/Customer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EventOrganizer/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EventOrganizer/Database.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EventOrganizer/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EventOrganizer/Event.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EventOrganizer/Facilitator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EventOrganizer/Facilitator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EventOrganizer/Secretary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EventOrganizer/Secretary.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EventOrganizer/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EventOrganizer/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ExportArrangement.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ExportArrangement.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ExportEvent.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ExportEvent.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ExportUsers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ExportUsers.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ArrangementHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArrangementHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Attendee.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Facilitator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Facilitator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Secretary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Secretary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/EventOrganizer/ArrangementHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EventOrganizer/ArrangementHandler.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -90,8 +72,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Admin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
+            <state relative-caret-position="204">
+              <caret line="56" column="73" lean-forward="true" selection-start-line="56" selection-start-column="73" selection-end-line="56" selection-end-column="73" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#364#365#0" expanded="true" />
@@ -246,7 +228,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543417790493" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543429826179" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/mysql-connector-java-8.0.13.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -309,7 +291,7 @@
       <workItem from="1543316772062" duration="1274000" />
       <workItem from="1543318298982" duration="10832000" />
       <workItem from="1543356634981" duration="1345000" />
-      <workItem from="1543404932986" duration="10342000" />
+      <workItem from="1543404932986" duration="11047000" />
     </task>
     <task id="LOCAL-00001" summary="cvf">
       <created>1543320346333</created>
@@ -360,17 +342,23 @@
       <option name="project" value="LOCAL" />
       <updated>1543412498208</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="superkode">
+      <created>1543417806712</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1543417806712</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89428000" />
+    <option name="totallyTimeSpent" value="90133000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28731343" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28731343" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -379,7 +367,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3275488" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3275488" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -590,8 +578,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Admin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
+        <state relative-caret-position="204">
+          <caret line="56" column="73" lean-forward="true" selection-start-line="56" selection-start-column="73" selection-end-line="56" selection-end-column="73" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#364#365#0" expanded="true" />
