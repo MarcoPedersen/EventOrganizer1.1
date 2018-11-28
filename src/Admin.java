@@ -36,7 +36,7 @@ public class Admin extends User {
     }
 
     public static void adminLogin() {
-        System.out.println("1. Tilføj bruger \t 2. Redigér bruger \t 3. Slet bruger \t 4. Afslut program");
+        System.out.println("1. Tilføj bruger \t 2. Redigér bruger \t 3. Slet bruger \t 4. Log ud \t 5. Afslut program");
         Scanner choice = new Scanner(System.in);
         int userChoice = choice.nextInt();
         switch (userChoice) {
@@ -62,10 +62,14 @@ public class Admin extends User {
                 break;
 
             case 4:
+                ArrangementHandler.arrangementLogin();
+
+            case 5:
                 System.out.println("Program lukker ned....");
                 System.exit(0);
             default:
-                System.out.println("prøv igen");
+                System.out.println("Ikke en valgmulighed.");
+                adminLogin();
                 break;
         }
     }

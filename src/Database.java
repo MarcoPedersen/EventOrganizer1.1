@@ -181,15 +181,26 @@ public class Database {
     }
 
     public static void editUserInDatabase(String i) {
-        Admin a = admin.newUser();
         try {
-            String sql = "UPDATE `users` SET `username`='"+ a.getUsername() + "', `password`='" + a.getPassword() +"', `name`='"+ a.getFullName() + "', `role`='" + a.getRole() + "' WHERE `username`='"+ i +"'";
-            Database.getConnect();
+            String query = "SELECT * FROM users WHERE username='" + i + "'";
             st = Database.getConnect().createStatement();
-            st.executeUpdate(sql);
-            System.out.println("Brugeroplysningerne er nu opdateret.");
-            st.close();
-            Admin.adminLogin();
+            ResultSet resultSet = st.executeQuery(query);
+            resultSet.last();
+            if (resultSet.getRow() == 0) {
+                System.out.println("Ingen brugere med dette navn.");
+                st.close();
+                resultSet.close();
+                Admin.adminLogin();
+            } else {
+                Admin a = admin.newUser();
+                String sql = "UPDATE `users` SET `username`='"+ a.getUsername() + "', `password`='" + a.getPassword() +"', `name`='"+ a.getFullName() + "', `role`='" + a.getRole() + "' WHERE `username`='"+ i +"'";
+                Database.getConnect();
+                st = Database.getConnect().createStatement();
+                st.executeUpdate(sql);
+                System.out.println("Brugeroplysningerne er nu opdateret.");
+                st.close();
+                Admin.adminLogin();
+            }
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
