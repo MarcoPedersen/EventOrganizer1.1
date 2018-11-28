@@ -70,8 +70,8 @@ public class Facilitator extends User {
                 Facilitator.facilitatorLogin();
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException s) {
+            s.printStackTrace();
         }
     }
 
@@ -85,8 +85,8 @@ public class Facilitator extends User {
                 System.out.println("-----------------");
                 System.out.println(name);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException s) {
+            s.printStackTrace();
         }
     }
 }

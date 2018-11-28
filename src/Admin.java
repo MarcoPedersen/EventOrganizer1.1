@@ -35,8 +35,6 @@ public class Admin extends User {
         return role;
     }
 
-
-
     public static void adminLogin() {
         System.out.println("1. Tilføj bruger \t 2. Redigér bruger \t 3. Slet bruger \t 4. Afslut program");
         Scanner choice = new Scanner(System.in);
@@ -118,8 +116,8 @@ public class Admin extends User {
                 System.out.println("-----------------");
                 System.out.println(username);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException s) {
+            s.printStackTrace();
         }
     }
 }

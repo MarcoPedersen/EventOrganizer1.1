@@ -10,10 +10,7 @@ public class Database {
     private static Connection connect;
     private static Statement st;
     private static ResultSet rs;
-    private static String username;
-    private static String password;
     private static String name;
-    private static String role;
     private static Arrangement arrangement = new Arrangement();
     private static Event event = new Event();
     private static Admin admin = new Admin();
@@ -25,7 +22,6 @@ public class Database {
     public static String getName() {
         return name;
     }
-
 
     public static void connectToDatabase() {
 
@@ -42,44 +38,45 @@ public class Database {
 
     }
 
-
     public static void userLogin(String u, String p) {
 
         try {
-
             String query = "SELECT * FROM users WHERE username='"+ u + "' and password='"+ p +"'";
             rs = st.executeQuery(query);
-
-            if (rs.next()) {
-
-                username = rs.getString("username");
-                password = rs.getString("password");
+            rs.last();
+            if (rs.getRow() == 0) {
+                System.out.println("Forkert login");
+                st.close();
+                rs.close();
+                ArrangementHandler.arrangementLogin();
+            }
+            rs.beforeFirst();
+            while (rs.next()) {
+                String username = rs.getString("username");
+                String password = rs.getString("password");
                 name = rs.getString("name");
-                role = rs.getString("role");
+                String role = rs.getString("role");
 
                 if (u.equals(username) && p.equals(password)) {
-                    System.out.println("Velkommen, " + name + ". Din rolle er: " + role);
 
+                    System.out.println("Velkommen, " + name + ". Din rolle er: " + role);
                     switch (role) {
                         case "Secretary":
                             Secretary.secretaryLogin();
-                        break;
-
+                            break;
                         case "Facilitator":
                             Facilitator.facilitatorLogin();
-                        break;
+                            break;
                         case "Customer":
                             Customer.customerLogin(name);
-                        break;
+                            break;
                         case "Admin":
                             Admin.adminLogin();
-                        break;
-                        default: System.out.println("Fejl med login.");
-                        break;
+                            break;
+                        default:
+                            System.out.println("Fejl med login.");
+                            break;
                     }
-
-                } else {
-                    System.out.println("Forkert brugernavn eller kodeord.");
                 }
             }
         } catch (SQLException e) {
@@ -101,8 +98,8 @@ public class Database {
         System.out.println("Dit arrangement er nu oprettet.");
         st.close();
         Secretary.secretaryLogin();
-    } catch (SQLException e) {
-        e.printStackTrace();
+    } catch (SQLException s) {
+        s.printStackTrace();
     }
 
     }
@@ -120,8 +117,8 @@ public class Database {
             System.out.println("Dit arrangement er nu redigeret.");
             st.close();
             Secretary.secretaryLogin();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException s) {
+            s.printStackTrace();
         }
     }
 
@@ -175,8 +172,8 @@ public class Database {
             System.out.println("Bruger " + a.getUsername() + " er nu oprettet.");
             st.close();
             Admin.adminLogin();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException s) {
+            s.printStackTrace();
         }
     }
 

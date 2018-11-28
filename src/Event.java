@@ -51,8 +51,10 @@ public class Event {
 
     public Event newEvent() {
 
-        System.out.println("Udfyld felterne:");
         Scanner arrScanner = new Scanner(System.in);
+        System.out.println("Vælg et arrangement som eventet skal tilføjes til: ");
+        Arrangement.getArrangements();
+        String arrangement = arrScanner.nextLine();
 
         System.out.println("Navn på eventet: ");
         String eName = arrScanner.nextLine();
@@ -65,10 +67,8 @@ public class Event {
         String eFacilitator = arrScanner.nextLine();
         System.out.println("Løs tekst: ");
         String eText = arrScanner.nextLine();
-        System.out.println("Vælg et arrangement som eventet skal tilføjes til: ");
-        Arrangement.getArrangements();
-        String arrangement = arrScanner.nextLine();
-        Event event = new Event(eName,eDescription,eType,eFacilitator,eText,arrangement);
+
+        Event event = new Event(eName, eDescription, eType, eFacilitator, eText, arrangement);
         return event;
 
     }
@@ -95,8 +95,8 @@ public class Event {
                 System.out.println("-----------------");
                 System.out.println(name);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException s) {
+            s.printStackTrace();
         }
     }
 }

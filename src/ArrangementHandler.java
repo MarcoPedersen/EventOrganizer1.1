@@ -1,8 +1,12 @@
+import java.sql.SQLException;
 import java.util.Scanner;
 public class ArrangementHandler {
 
     public static void main(String[] args) {
+        arrangementLogin();
+    }
 
+    public static void arrangementLogin() {
         Database.connectToDatabase();
         Scanner login = new Scanner(System.in);
 
@@ -12,7 +16,7 @@ public class ArrangementHandler {
         String p = login.nextLine();
 
         Database.userLogin(u.toLowerCase(), p.toLowerCase());
-    }
 
+    }
 
 }
