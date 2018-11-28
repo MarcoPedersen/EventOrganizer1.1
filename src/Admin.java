@@ -92,17 +92,30 @@ public class Admin extends User {
 
     public static void deleteUser(String i) {
         try {
-            String sql = "DELETE FROM users WHERE username='"+ i + "'";
-
+            String query = "SELECT * FROM users WHERE username='" + i + "'";
             st = Database.getConnect().createStatement();
-            st.execute(sql);
-            System.out.println("Brugeren " + i + " er nu slettet.");
-            st.close();
-            adminLogin();
-        } catch (SQLException sqlEx) {
-            sqlEx.printStackTrace();
+            ResultSet resultSet = st.executeQuery(query);
+            resultSet.last();
+            if (resultSet.getRow() == 0) {
+                System.out.println("Ingen brugere med dette navn.");
+                st.close();
+                resultSet.close();
+                adminLogin();
+            } else {
+
+                String sql = "DELETE FROM users WHERE username='" + i + "'";
+
+                st = Database.getConnect().createStatement();
+                st.execute(sql);
+                System.out.println("Brugeren " + i + " er nu slettet.");
+                st.close();
+                adminLogin();
+            }
+        } catch(SQLException sqlEx){
+                sqlEx.printStackTrace();
         }
     }
+
 
     public static void getUser() {
         try {
