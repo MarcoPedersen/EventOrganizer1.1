@@ -50,8 +50,8 @@ public class Facilitator extends User {
                 Facilitator.facilitatorLogin();
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 
@@ -70,8 +70,8 @@ public class Facilitator extends User {
                 Facilitator.facilitatorLogin();
             }
 
-        } catch (SQLException s) {
-            s.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 
@@ -85,8 +85,8 @@ public class Facilitator extends User {
                 System.out.println("-----------------");
                 System.out.println(name);
             }
-        } catch (SQLException s) {
-            s.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 }

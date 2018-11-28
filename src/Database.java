@@ -74,13 +74,16 @@ public class Database {
                             Admin.adminLogin();
                             break;
                         default:
-                            System.out.println("Fejl med login.");
+                            System.out.println("Ikke gyldig rolle - prøv venligst igen");
+                            st.close();
+                            rs.close();
+                            ArrangementHandler.arrangementLogin();
                             break;
                     }
                 }
             }
-        } catch (SQLException e) {
-            System.out.println("Fejl med databasen.");
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
 
     }
@@ -98,8 +101,8 @@ public class Database {
         System.out.println("Dit arrangement er nu oprettet.");
         st.close();
         Secretary.secretaryLogin();
-    } catch (SQLException s) {
-        s.printStackTrace();
+    } catch (SQLException sqlEx) {
+        sqlEx.printStackTrace();
     }
 
     }
@@ -117,8 +120,8 @@ public class Database {
             System.out.println("Dit arrangement er nu redigeret.");
             st.close();
             Secretary.secretaryLogin();
-        } catch (SQLException s) {
-            s.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 
@@ -136,8 +139,8 @@ public class Database {
             System.out.println("Dit event er nu oprettet og hører til arrangementet: " + e.getArrangement());
             st.close();
             Secretary.secretaryLogin();
-        } catch (SQLException s){
-            s.printStackTrace();
+        } catch (SQLException sqlEx){
+            sqlEx.printStackTrace();
         }
 
     }
@@ -155,8 +158,8 @@ public class Database {
             System.out.println("Dit arrangement er nu redigeret.");
             st.close();
             Secretary.secretaryLogin();
-        } catch(SQLException s) {
-            s.printStackTrace();
+        } catch(SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 
@@ -172,8 +175,8 @@ public class Database {
             System.out.println("Bruger " + a.getUsername() + " er nu oprettet.");
             st.close();
             Admin.adminLogin();
-        } catch (SQLException s) {
-            s.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 
@@ -187,8 +190,8 @@ public class Database {
             System.out.println("Brugeroplysningerne er nu opdateret.");
             st.close();
             Admin.adminLogin();
-        } catch (SQLException s) {
-            s.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
 
     }

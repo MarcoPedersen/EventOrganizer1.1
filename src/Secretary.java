@@ -30,8 +30,8 @@ public class Secretary extends User {
                     String j = delete.nextLine();
                     try {
                         arrangement.deleteArrangement(j.toLowerCase());
-                    } catch (SQLException e) {
-                        e.printStackTrace();
+                    } catch (SQLException sqlEx) {
+                        sqlEx.printStackTrace();
                     }
                     break;
                     default: System.out.println("prøv igen");
@@ -62,8 +62,8 @@ public class Secretary extends User {
                         String j = delete.nextLine();
                         try {
                             Event.deleteEvent(j.toLowerCase());
-                        } catch (SQLException e) {
-                            e.printStackTrace();
+                        } catch (SQLException sqlEx) {
+                            sqlEx.printStackTrace();
                         }
                         break;
 

@@ -58,11 +58,7 @@ public class Admin extends User {
                 getUser();
                 Scanner delete = new Scanner(System.in);
                 String j = delete.nextLine();
-                try {
-                    deleteUser(j.toLowerCase());
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                deleteUser(j.toLowerCase());
                 break;
 
             case 4:
@@ -94,30 +90,32 @@ public class Admin extends User {
     }
 
 
-    public static void deleteUser(String i) throws SQLException {
+    public static void deleteUser(String i) {
+        try {
+            String sql = "DELETE FROM users WHERE username='"+ i + "'";
 
-        String sql = "DELETE FROM users WHERE username='"+ i + "'";
-
-        st = Database.getConnect().createStatement();
-        st.execute(sql);
-        System.out.println("Brugeren " + i + " er nu slettet.");
-        st.close();
-        adminLogin();
+            st = Database.getConnect().createStatement();
+            st.execute(sql);
+            System.out.println("Brugeren " + i + " er nu slettet.");
+            st.close();
+            adminLogin();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        }
     }
 
     public static void getUser() {
         try {
             String query = "SELECT * FROM users";
-            st = Database.getConnect().createStatement();
-            rs = st.executeQuery(query);
+            setupStatement(query);
 
             while (rs.next()) {
                 String username = rs.getString("username");
                 System.out.println("-----------------");
                 System.out.println(username);
             }
-        } catch (SQLException s) {
-            s.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 }

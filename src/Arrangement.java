@@ -85,8 +85,8 @@ public class Arrangement {
                 System.out.println("-----------------");
                 System.out.println(name);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 

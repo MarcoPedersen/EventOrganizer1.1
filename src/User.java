@@ -12,8 +12,8 @@ public class User {
         try {
             st = Database.getConnect().createStatement();
             rs = st.executeQuery(query);
-        } catch (SQLException s) {
-            s.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 

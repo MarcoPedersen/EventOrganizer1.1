@@ -41,8 +41,8 @@ public class Csv {
                 i.printStackTrace();
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 

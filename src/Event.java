@@ -95,8 +95,8 @@ public class Event {
                 System.out.println("-----------------");
                 System.out.println(name);
             }
-        } catch (SQLException s) {
-            s.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 }

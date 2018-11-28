@@ -31,8 +31,8 @@ public class Customer extends User {
                 System.exit(0);
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 
