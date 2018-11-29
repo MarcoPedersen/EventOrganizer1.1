@@ -16,6 +16,8 @@ public class ArrangementHandler {
         String p = login.nextLine();
 
         Database.userLogin(u.toLowerCase(), p.toLowerCase());
+
+
     }
 
 }

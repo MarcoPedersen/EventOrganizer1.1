@@ -38,13 +38,13 @@ public class Admin extends User {
     public static void adminLogin() {
         System.out.println("1. Tilføj bruger \t 2. Redigér bruger \t 3. Slet bruger \t 4. Log ud \t 5. Afslut program");
         Scanner choice = new Scanner(System.in);
-        int userChoice = choice.nextInt();
+        String userChoice = choice.nextLine();
         switch (userChoice) {
-            case 1:
+            case "1":
                 Database.userToDatabase();
                 break;
 
-            case 2:
+            case "2":
                 System.out.println("Vælg hvilken bruger du vil redigere:");
                 getUser();
                 Scanner edit = new Scanner(System.in);
@@ -53,7 +53,7 @@ public class Admin extends User {
                 Database.editUserInDatabase(i);
                 break;
 
-            case 3:
+            case "3":
                 System.out.println("Vælg hvilken bruger du vil slette:");
                 getUser();
                 Scanner delete = new Scanner(System.in);
@@ -61,10 +61,10 @@ public class Admin extends User {
                 deleteUser(j.toLowerCase());
                 break;
 
-            case 4:
+            case "4":
                 ArrangementHandler.arrangementLogin();
 
-            case 5:
+            case "5":
                 System.out.println("Program lukker ned....");
                 System.exit(0);
             default:

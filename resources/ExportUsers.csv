@@ -1,8 +1,8 @@
-admin,admin,Marco Drengen,Admin
 thomas,vindelev,Thomas V.,Facilitator
-nick,hansen,Nick,Customer
 marco,drengen,Marco the D.,Secretary
-bruger,bruger,Marco,Customer
-erik,eriksen,Erik,Secretary
-z,z,z,z
-admin,admin,Marco Drengen,Admin
+nick,hansen,Nick,Secretary
+a,a,Test-admin,Admin
+s,s,s,Secretary
+f,f,Test-facilitator,Facilitator
+c,c,Test-customer,Customer
+e,e,e,Customer

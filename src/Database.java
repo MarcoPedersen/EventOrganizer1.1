@@ -24,7 +24,6 @@ public class Database {
     }
 
     public static void connectToDatabase() {
-
         try {
             st = getConnect().createStatement();
         } catch (SQLException e) {
@@ -33,13 +32,10 @@ public class Database {
     }
 
     public static Connection getConnect() throws SQLException {
-
         return connect = DriverManager.getConnection(getUrl(), "thomas", "123456");
-
     }
 
     public static void userLogin(String u, String p) {
-
         try {
             String query = "SELECT * FROM users WHERE username='"+ u + "' and password='"+ p +"'";
             rs = st.executeQuery(query);
@@ -89,22 +85,20 @@ public class Database {
     }
 
     public static void arrangementToDatabase() {
-    try {
+        try {
+            Arrangement a = arrangement.newArrangement();
 
-        Arrangement a = arrangement.newArrangement();
-
-        String sql =    "INSERT INTO `arrangement`(`id`, `aName`, `aStart`, `aEnd`, `aPrice`,`attendees`) VALUES (null, \""
+            String sql =    "INSERT INTO `arrangement`(`id`, `aName`, `aStart`, `aEnd`, `aPrice`,`attendees`) VALUES (null, \""
                 + a.getName() + "\", \"" + a.getStart() + "\", \"" + a.getEnd() + "\", \"" + a.getPrice() + "\", \"" + a.getAttendees() + "\")";
 
-        st = Database.getConnect().createStatement();
-        st.execute(sql);
-        System.out.println("Dit arrangement er nu oprettet.");
-        st.close();
-        Secretary.secretaryLogin();
-    } catch (SQLException sqlEx) {
-        sqlEx.printStackTrace();
-    }
-
+            st = Database.getConnect().createStatement();
+            st.execute(sql);
+            System.out.println("Dit arrangement er nu oprettet.");
+            st.close();
+            Secretary.secretaryLogin();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        }
     }
 
     public static void editArrangementInDatabase(String i) {
@@ -125,10 +119,10 @@ public class Database {
         }
     }
 
-
     public static void eventToDatabase() {
-        Event e = event.newEvent();
         try {
+
+            Event e = event.newEvent();
 
             String sql =    "INSERT INTO `event`(`id`, `eName`, `eDescription`, `eType`,`eFacilitator`,`eText`,`arrangement`) " +
                     "VALUES (null, \"" + e.geteName() + "\", \"" + e.geteDescription() + "\", \"" + e.geteType() + "\", \"" + e.geteFacilitator() +
@@ -146,18 +140,26 @@ public class Database {
     }
 
     public static void editEventInDatabase(String i) {
-        Event e = event.newEvent();
         try {
-            String sql =    "UPDATE `event` SET `eName`='"+ e.geteName() + "', `eDescription`='" + e.geteDescription() +"', `eType`='"+ e.geteType()
-                    + "', `eFacilitator`='" + e.geteFacilitator() + "',`eText`='"+ e.geteText() + "', `arrangement`='" + e.getArrangement()
-                    + "' WHERE `eName`='"+ i +"'";
+            String query = "SELECT * FROM event WHERE eName='" + i + "'";
+            rs = st.executeQuery(query);
+            rs.last();
+            if (rs.getRow() == 0) {
+                System.out.println("Event findes ikke");
+                Secretary.secretaryLogin();
+            } else {
+                Event e = event.newEvent();
 
-            Database.getConnect();
-            st = Database.getConnect().createStatement();
-            st.executeUpdate(sql);
-            System.out.println("Dit arrangement er nu redigeret.");
-            st.close();
-            Secretary.secretaryLogin();
+                String sql = "UPDATE `event` SET `eName`='" + e.geteName() + "', `eDescription`='" + e.geteDescription() + "', `eType`='" + e.geteType()
+                        + "', `eFacilitator`='" + e.geteFacilitator() + "',`eText`='" + e.geteText() + "', `arrangement`='" + e.getArrangement()
+                        + "' WHERE `eName`='" + i + "'";
+
+                st = Database.getConnect().createStatement();
+                st.executeUpdate(sql);
+                System.out.println("Dit event er nu redigeret.");
+                st.close();
+                Secretary.secretaryLogin();
+            }
         } catch(SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
@@ -204,6 +206,24 @@ public class Database {
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
+    }
 
+    public static boolean arrangementExists(String arr) {
+        String sql = "SELECT * FROM arrangement WHERE aName='" + arr + "'";
+        try {
+            st = Database.getConnect().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            rs.last();
+            if(rs.getRow() == 0) {
+                rs.close();
+                st.close();
+                return false;
+            } else {
+                return true;
+            }
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        }
+        return false;
     }
 }
