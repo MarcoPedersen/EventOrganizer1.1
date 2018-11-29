@@ -1,4 +1,3 @@
-import javax.xml.crypto.Data;
 import java.sql.SQLException;
 import java.util.Scanner;
 public class Facilitator extends User {
@@ -34,8 +33,7 @@ public class Facilitator extends User {
     public static void getFacilitatorInformation(String s) {
         try {
             String query = "SELECT * FROM `arrangement` WHERE `aName`='"+ s + "'";
-            st = Database.getConnect().createStatement();
-            rs = st.executeQuery(query);
+            setupStatement(query);
 
             if (rs.next()) {
                 String start = rs.getString("aStart");
@@ -52,16 +50,15 @@ public class Facilitator extends User {
                 Facilitator.facilitatorLogin();
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 
     public static void getEventsToFacilitator(String name) {
         try {
             String query = "SELECT `eName` FROM `event` WHERE `eFacilitator`='"+ name + "'";
-            st = Database.getConnect().createStatement();
-            rs = st.executeQuery(query);
+            setupStatement(query);
 
             if (rs.next()) {
 
@@ -73,8 +70,23 @@ public class Facilitator extends User {
                 Facilitator.facilitatorLogin();
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        }
+    }
+
+    public static void getFacilitator() {
+        try {
+            String query = "SELECT * FROM users WHERE role='Facilitator'";
+            setupStatement(query);
+
+            while (rs.next()) {
+                String name = rs.getString("name");
+                System.out.println("-----------------");
+                System.out.println(name);
+            }
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 }

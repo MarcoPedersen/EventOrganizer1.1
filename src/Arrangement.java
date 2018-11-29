@@ -43,7 +43,7 @@ public class Arrangement {
         return attendees;
     }
 
-    public Arrangement makeArrangement() {
+    public Arrangement newArrangement() {
 
         System.out.println("Udfyld felterne:");
         Scanner arrScanner = new Scanner(System.in);
@@ -60,28 +60,6 @@ public class Arrangement {
         String attendees = arrScanner.nextLine();
 
         Arrangement arrangement = new Arrangement(aName, aStart, aEnd, aPrice, attendees);
-
-        return arrangement;
-    }
-
-    public Arrangement editArrangement() {
-
-        System.out.println("Skriv de nye informationer:");
-        System.out.println("-----------------------------");
-        Scanner arrScanner = new Scanner(System.in);
-
-        System.out.println("Navn på arrangement: ");
-        String Name = arrScanner.nextLine();
-        System.out.println("Arrangementets startstidspunkt: ");
-        String Start = arrScanner.nextLine();
-        System.out.println("Arrangementets sluttidspunkt: ");
-        String End = arrScanner.nextLine();
-        System.out.println("Prisen for arrangementet: ");
-        String Price = arrScanner.nextLine();
-        System.out.println("Tilmeldte: ");
-        String Attendees = arrScanner.nextLine();
-
-        Arrangement arrangement = new Arrangement(Name, Start, End, Price, Attendees);
 
         return arrangement;
     }
@@ -107,8 +85,8 @@ public class Arrangement {
                 System.out.println("-----------------");
                 System.out.println(name);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 

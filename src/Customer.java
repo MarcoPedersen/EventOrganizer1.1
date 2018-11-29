@@ -12,8 +12,7 @@ public class Customer extends User {
     public static void getCustomer(String s) {
         try {
             String query = "SELECT * FROM `arrangement` WHERE `attendees` LIKE '%"+ s +"%'";
-            st = Database.getConnect().createStatement();
-            rs = st.executeQuery(query);
+            setupStatement(query);
 
             if (rs.next()) {
                 String aName = rs.getString("aName");
@@ -32,8 +31,8 @@ public class Customer extends User {
                 System.exit(0);
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 

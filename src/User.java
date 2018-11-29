@@ -1,15 +1,20 @@
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class User {
 
-    static String aDuration;
-    static String name;
-    static String type;
-    static String description;
-    static String attendees;
     static Statement st;
     static ResultSet rs;
 
 
-
+    public static void setupStatement(String query) {
+        try {
+            st = Database.getConnect().createStatement();
+            rs = st.executeQuery(query);
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        }
+    }
 
 }

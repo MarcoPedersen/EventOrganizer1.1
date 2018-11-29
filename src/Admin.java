@@ -1,28 +1,47 @@
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Admin extends User {
 
+    private static String username;
+    private static String password;
+    private static String fullName;
+    private static String role;
+
+    public Admin() {
+
+    }
+
+    public Admin(String username, String password, String fullName, String role) {
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.role = role;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
     public static void adminLogin() {
-        System.out.println("1. Tilføj bruger \t 2. Redigér bruger \t 3. Slet bruger \t 4. Afslut program");
+        System.out.println("1. Tilføj bruger \t 2. Redigér bruger \t 3. Slet bruger \t 4. Log ud \t 5. Afslut program");
         Scanner choice = new Scanner(System.in);
         int userChoice = choice.nextInt();
         switch (userChoice) {
             case 1:
-                System.out.println("Udfyld felterne:");
-                Scanner arrScanner = new Scanner(System.in);
-
-                System.out.println("Brugernavn: ");
-                String username = arrScanner.nextLine();
-                System.out.println("Kodeord: ");
-                String password = arrScanner.nextLine();
-                System.out.println("Fulde navn: ");
-                String fullName = arrScanner.nextLine();
-                System.out.println("Rolle: ");
-                String role = arrScanner.nextLine();
-
-                addUser(username.toLowerCase(), password.toLowerCase(), fullName, role);
-
+                Database.userToDatabase();
                 break;
 
             case 2:
@@ -30,11 +49,8 @@ public class Admin extends User {
                 getUser();
                 Scanner edit = new Scanner(System.in);
                 String i = edit.nextLine();
-                try {
-                    editUser(i);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+
+                Database.editUserInDatabase(i);
                 break;
 
             case 3:
@@ -42,86 +58,81 @@ public class Admin extends User {
                 getUser();
                 Scanner delete = new Scanner(System.in);
                 String j = delete.nextLine();
-                try {
-                    deleteUser(j.toLowerCase());
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                deleteUser(j.toLowerCase());
                 break;
 
             case 4:
+                ArrangementHandler.arrangementLogin();
+
+            case 5:
                 System.out.println("Program lukker ned....");
                 System.exit(0);
             default:
-                System.out.println("prøv igen");
+                System.out.println("Ikke en valgmulighed.");
+                adminLogin();
                 break;
         }
     }
 
-    public static void addUser(String u, String p, String fn, String r) {
-        try {
-            String sql = "INSERT INTO `users`(`id`, `username`, `password`, `name`,`role`) VALUES (null, \"" + u + "\", \"" + p + "\", \"" + fn + "\", \"" + r + "\")";
+    public Admin newUser() {
 
-            st = Database.getConnect().createStatement();
-            st.execute(sql);
-            System.out.println("Bruger " + u + " er nu oprettet.");
-            Admin.adminLogin();
-            st.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        System.out.println("Udfyld felterne:");
+        Scanner arrScanner = new Scanner(System.in);
 
-    }
-
-    public static void editUser(String i) throws SQLException {
-
-        System.out.println("Skriv de nye informationer:");
-        System.out.println("-----------------------------");
-        Scanner userScanner = new Scanner(System.in);
-
-        System.out.println("Nyt brugernavn: ");
-        String username = userScanner.nextLine();
-        System.out.println("Nyt kodeord: ");
-        String password = userScanner.nextLine();
+        System.out.println("Brugernavn: ");
+        username = arrScanner.nextLine();
+        System.out.println("Kodeord: ");
+        password = arrScanner.nextLine();
         System.out.println("Fulde navn: ");
-        String name = userScanner.nextLine();
+        fullName = arrScanner.nextLine();
         System.out.println("Rolle: ");
-        String role = userScanner.nextLine();
+        role = arrScanner.nextLine();
 
+        Admin a = new Admin(username, password, fullName, role);
 
-        String sql = "UPDATE `users` SET `username`='"+ username + "', `password`='" + password +"', `name`='"+ name + "', `role`='" + role + "' WHERE `username`='"+ i +"'";
-        Database.getConnect();
-        st = Database.getConnect().createStatement();
-        st.executeUpdate(sql);
-        System.out.println("Brugeroplysningerne er nu opdateret.");
-        Admin.adminLogin();
-        st.close();
+        return a;
     }
 
-    public static void deleteUser(String i) throws SQLException {
 
-        String sql = "DELETE FROM users WHERE username='"+ i + "'";
+    public static void deleteUser(String i) {
+        try {
+            String query = "SELECT * FROM users WHERE username='" + i + "'";
+            st = Database.getConnect().createStatement();
+            ResultSet resultSet = st.executeQuery(query);
+            resultSet.last();
+            if (resultSet.getRow() == 0) {
+                System.out.println("Ingen brugere med dette navn.");
+                st.close();
+                resultSet.close();
+                adminLogin();
+            } else {
 
-        st = Database.getConnect().createStatement();
-        st.execute(sql);
-        System.out.println("Brugeren " + i + " er nu slettet.");
-        Admin.adminLogin();
-        st.close();
+                String sql = "DELETE FROM users WHERE username='" + i + "'";
+
+                st = Database.getConnect().createStatement();
+                st.execute(sql);
+                System.out.println("Brugeren " + i + " er nu slettet.");
+                st.close();
+                adminLogin();
+            }
+        } catch(SQLException sqlEx){
+                sqlEx.printStackTrace();
+        }
     }
+
 
     public static void getUser() {
         try {
             String query = "SELECT * FROM users";
-            st = Database.getConnect().createStatement();
-            rs = st.executeQuery(query);
+            setupStatement(query);
 
             while (rs.next()) {
                 String username = rs.getString("username");
                 System.out.println("-----------------");
                 System.out.println(username);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
         }
     }
 }
