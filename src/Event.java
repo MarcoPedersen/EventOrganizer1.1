@@ -56,6 +56,12 @@ public class Event {
         Arrangement.getArrangements();
         String arrangement = arrScanner.nextLine();
 
+
+        if(!Database.arrangementExists(arrangement)) {
+            System.out.println("Dette arrangement eksisterer ikke");
+            Secretary.secretaryLogin();
+        }
+
         System.out.println("Navn på eventet: ");
         String eName = arrScanner.nextLine();
         System.out.println("Beskrivelse af eventet: ");
