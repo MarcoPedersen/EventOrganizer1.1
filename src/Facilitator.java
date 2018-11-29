@@ -14,7 +14,7 @@ public class Facilitator extends User {
         getFacilitatorInformation(s.toLowerCase());
 
         System.out.println("Vil du gerne importere data fra CSV-fil?");
-        System.out.println("ja eller nej");
+        System.out.println("Ja eller nej");
         Scanner csvChoice = new Scanner(System.in);
         String csv = csvChoice.nextLine().toLowerCase();
         if(csv.equals("ja")) {
@@ -24,8 +24,8 @@ public class Facilitator extends User {
 //                Csv.ImportUsers();
 
         } else {
-            System.out.println("Tak for denne gang...");
-            System.exit(0);
+            System.out.println("Logger af...\n");
+            ArrangementHandler.arrangementLogin();
         }
 
     }

@@ -1,4 +1,5 @@
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class Customer extends User {
 
@@ -7,6 +8,21 @@ public class Customer extends User {
 
         System.out.println("Arrangementer du er tilmeldt til:");
         getCustomer(n);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("1. Log ud\t2. Afslut programmet");
+        String choice = sc.nextLine();
+        switch (choice) {
+            case "1":
+                ArrangementHandler.arrangementLogin();
+                break;
+            case "2":
+                System.out.println("Program lukker ned....");
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Ikke en valgmulighed - prøv igen.");
+                ArrangementHandler.arrangementLogin();
+        }
     }
 
     public static void getCustomer(String s) {
