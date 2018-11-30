@@ -80,7 +80,6 @@ public class Event {
     }
 
     public static void deleteEvent(String i) throws SQLException {
-
         String sql = "DELETE FROM event WHERE eName='"+ i + "'";
         getEvent();
         st = Database.getConnect().createStatement();

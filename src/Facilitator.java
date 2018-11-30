@@ -46,7 +46,7 @@ public class Facilitator extends User {
                 System.out.println("Arrangementet koster: " + price);
                 System.out.println("Deltagere : " +attendees);
             } else {
-                System.out.println("Fejl...");
+                System.out.println("Dette arrangement findes ikke - prøv igen.");
                 Facilitator.facilitatorLogin();
             }
 
