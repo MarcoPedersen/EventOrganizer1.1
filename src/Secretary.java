@@ -51,7 +51,7 @@ public class Secretary extends User {
                 case "1":
                     Event event = new Event();
                     Event e = event.newEvent();
-                    Database.eventToDatabase(e);
+                    Database.eventToDatabase(e,true);
                     break;
 
                 case "2":
@@ -85,6 +85,7 @@ public class Secretary extends User {
             Csv.importArrangement();
             Csv.importEvent();
             Csv.importUsers();
+            Secretary.secretaryLogin();
         } else if (menuChoice.equals("5")) {
             ArrangementHandler.arrangementLogin();
         } else if (menuChoice.equals("6")){

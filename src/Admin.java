@@ -43,7 +43,7 @@ public class Admin extends User {
             case "1":
                 Admin admin= new Admin();
                 Admin t = admin.newUser();
-                Database.userToDatabase(t);
+                Database.userToDatabase(t, true);
                 break;
 
             case "2":

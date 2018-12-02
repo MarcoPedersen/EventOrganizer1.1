@@ -122,92 +122,44 @@ public class Csv {
          }
         }
     public static void importArrangement() {
-
         try {
-            BufferedReader bReader = new BufferedReader(new FileReader("resources/ExportArrangement.csv"));
-
-            while (bReader != null) {
-                String read;
-                try {
-                    read = bReader.readLine();
-                    if (read != null)
-                    {
-                        String[] array = read.split(",+");
-                        Arrangement arrangement = new Arrangement(array[0], array[1], array[2], array[3], array[4]);
-                        Database.insertArrangement(arrangement," Din CSV fil er nu importeret", false);
-                    }
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-                finally
-                {
-                    if (bReader == null)
-                    {
-                        bReader.close();
-                    }
-                }
+            BufferedReader br = new BufferedReader(new FileReader("resources/ExportArrangement.csv"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] array = line.split(",");
+                Arrangement arrangement = new Arrangement(array[0], array[1], array[2], array[3], array[4]);
+                Database.insertArrangement(arrangement," Din CSV fil er nu importeret", false);
             }
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     public static void importUsers() {
-
         try {
-            BufferedReader bReader = new BufferedReader(new FileReader("resources/ExportUsers.csv"));
-
-            while (bReader != null) {
-                String read;
-                try {
-                    read = bReader.readLine();
-                    if (read != null)
-                    {
-                        String[] array = read.split(",+");
-                        Admin admin = new Admin(array[0], array[1], array[2], array[3]);
-                        Database.userToDatabase(admin);
-                    }
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-                finally
-                {
-                    if (bReader == null)
-                    {
-                        bReader.close();
-                    }
-                }
+            BufferedReader br = new BufferedReader(new FileReader("resources/ExportUsers.csv"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] array = line.split(",");
+                Admin admin = new Admin(array[0], array[1], array[2], array[3]);
+                Database.userToDatabase(admin, false);
             }
+            br.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
     public static void importEvent() {
-
         try {
-            BufferedReader bReader = new BufferedReader(new FileReader("resources/ExportEvent.csv"));
-
-            while (bReader != null) {
-                String read;
-                try {
-                    read = bReader.readLine();
-                    if (read != null)
-                    {
-                        String[] array = read.split(",+");
-                        Event event = new Event(array[0], array[1], array[2], array[3], array[4], array[5]);
-                        Database.eventToDatabase(event);
-                    }
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-                finally
-                {
-                    if (bReader == null)
-                    {
-                        bReader.close();
-                    }
-                }
+            BufferedReader br = new BufferedReader(new FileReader("resources/ExportEvent.csv"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] array = line.split(",");
+                Event event = new Event(array[0], array[1], array[2], array[3], array[4], array[5]);
+                Database.eventToDatabase(event,false);
             }
+            br.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
