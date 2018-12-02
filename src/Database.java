@@ -85,17 +85,22 @@ public class Database {
     }
 
     public static void arrangementToDatabase() {
-        try {
-            Arrangement a = arrangement.newArrangement();
+        Arrangement a = arrangement.newArrangement();
+    }
 
+    public static void insertArrangement (Arrangement a, String message, boolean returnAfter) {
+        try {
             String sql =    "INSERT INTO `arrangement`(`id`, `aName`, `aStart`, `aEnd`, `aPrice`,`attendees`) VALUES (null, \""
-                + a.getName() + "\", \"" + a.getStart() + "\", \"" + a.getEnd() + "\", \"" + a.getPrice() + "\", \"" + a.getAttendees() + "\")";
+                    + a.getName() + "\", \"" + a.getStart() + "\", \"" + a.getEnd() + "\", \"" + a.getPrice() + "\", \"" + a.getAttendees() + "\")";
 
             st = Database.getConnect().createStatement();
             st.execute(sql);
-            System.out.println("Dit arrangement er nu oprettet.");
+            System.out.println(message);
             st.close();
-            Secretary.secretaryLogin();
+
+            if(returnAfter) {
+                Secretary.secretaryLogin();
+            }
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }

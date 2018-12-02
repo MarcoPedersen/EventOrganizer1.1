@@ -1,4 +1,6 @@
 import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -119,5 +121,34 @@ public class Csv {
                 e.printStackTrace();
          }
         }
+    public static void importArrangement() {
 
+        try {
+            BufferedReader bReader = new BufferedReader(new FileReader("resources/ExportArrangement.csv"));
+
+            while (bReader != null) {
+                String read;
+                try {
+                    read = bReader.readLine();
+                    if (read != null)
+                    {
+                        String[] array = read.split(",+");
+                        Arrangement arrangement = new Arrangement(array[0], array[1], array[2], array[3], array[4]);
+                        Database.insertArrangement(arrangement," Din CSV fil er nu importeret", false);
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                finally
+                {
+                    if (bReader == null)
+                    {
+                        bReader.close();
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
+}

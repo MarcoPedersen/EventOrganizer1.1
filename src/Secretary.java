@@ -6,7 +6,7 @@ public class Secretary extends User {
 
 
     public static void secretaryLogin() {
-        System.out.println("1. Arrangement-menu \t 2. Event-menu \t 3. Eksporter CSV-fil \t 4. Log ud \t 5. Afslut program");
+        System.out.println("1. Arrangement-menu \t 2. Event-menu \t 3. Eksporter CSV-fil \t 4. Importer CSV-fil \t 5. Log ud \t 6. Afslut program");
         Scanner menu = new Scanner(System.in);
         String menuChoice = menu.nextLine();
         Arrangement arrangement = new Arrangement();
@@ -17,7 +17,10 @@ public class Secretary extends User {
             String userChoice = choice.nextLine();
             switch (userChoice) {
                 case "1":
-                    Database.arrangementToDatabase();
+                    Arrangement a = arrangement.newArrangement();
+
+                    //Database.arrangementToDatabase();
+                    Database.insertArrangement(a, "Dit arrangement er nu oprettet", true);
                     break;
                 case "2":
                     System.out.println("Vælg hvilket arrangement du vil redigere:");
@@ -81,10 +84,14 @@ public class Secretary extends User {
             Csv.exportArrangement();
             Csv.exportEvent();
             Csv.exportUsers();
-
         } else if (menuChoice.equals("4")) {
+
+
+            Csv.importArrangement();
+
+        } else if (menuChoice.equals("5")) {
             ArrangementHandler.arrangementLogin();
-        } else if (menuChoice.equals("5")){
+        } else if (menuChoice.equals("6")){
             System.out.println("Program lukker ned...");
             System.exit(0);
         } else {
