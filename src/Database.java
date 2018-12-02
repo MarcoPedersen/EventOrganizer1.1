@@ -124,11 +124,8 @@ public class Database {
         }
     }
 
-    public static void eventToDatabase() {
+    public static void eventToDatabase(Event e) {
         try {
-
-            Event e = event.newEvent();
-
             String sql =    "INSERT INTO `event`(`id`, `eName`, `eDescription`, `eType`,`eFacilitator`,`eText`,`arrangement`) " +
                     "VALUES (null, \"" + e.geteName() + "\", \"" + e.geteDescription() + "\", \"" + e.geteType() + "\", \"" + e.geteFacilitator() +
                     "\", \"" + e.geteText()+ "\", \"" + e.getArrangement() + "\")";

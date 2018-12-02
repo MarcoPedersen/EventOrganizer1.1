@@ -51,7 +51,9 @@ public class Secretary extends User {
             String eChoice = Choice.nextLine();
             switch (eChoice) {
                 case "1":
-                    Database.eventToDatabase();
+                    Event event = new Event();
+                    Event e = event.newEvent();
+                    Database.eventToDatabase(e);
                     break;
 
                 case "2":
@@ -85,10 +87,8 @@ public class Secretary extends User {
             Csv.exportEvent();
             Csv.exportUsers();
         } else if (menuChoice.equals("4")) {
-
-
             Csv.importArrangement();
-
+            Csv.importEvent();
         } else if (menuChoice.equals("5")) {
             ArrangementHandler.arrangementLogin();
         } else if (menuChoice.equals("6")){
