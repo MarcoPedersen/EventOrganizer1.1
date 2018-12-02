@@ -18,8 +18,6 @@ public class Secretary extends User {
             switch (userChoice) {
                 case "1":
                     Arrangement a = arrangement.newArrangement();
-
-                    //Database.arrangementToDatabase();
                     Database.insertArrangement(a, "Dit arrangement er nu oprettet", true);
                     break;
                 case "2":
@@ -76,19 +74,17 @@ public class Secretary extends User {
                         sqlEx.printStackTrace();
                     }
                     break;
-
                 default:
                     System.out.println("Noget gik galt");
             }
-
         } else if (menuChoice.equals("3")) {
-
             Csv.exportArrangement();
             Csv.exportEvent();
             Csv.exportUsers();
         } else if (menuChoice.equals("4")) {
             Csv.importArrangement();
             Csv.importEvent();
+            Csv.importUsers();
         } else if (menuChoice.equals("5")) {
             ArrangementHandler.arrangementLogin();
         } else if (menuChoice.equals("6")){

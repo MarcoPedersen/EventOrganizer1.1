@@ -167,9 +167,9 @@ public class Database {
         }
     }
 
-    public static void userToDatabase() {
+    public static void userToDatabase(Admin a) {
 
-        Admin a = admin.newUser();
+
 
         try {
             String sql = "INSERT INTO `users`(`id`, `username`, `password`, `name`,`role`) VALUES (null, \"" + a.getUsername() + "\", \"" + a.getPassword() + "\", \"" + a.getFullName() + "\", \"" + a.getRole() + "\")";

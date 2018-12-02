@@ -41,7 +41,9 @@ public class Admin extends User {
         String userChoice = choice.nextLine();
         switch (userChoice) {
             case "1":
-                Database.userToDatabase();
+                Admin admin= new Admin();
+                Admin t = admin.newUser();
+                Database.userToDatabase(t);
                 break;
 
             case "2":
@@ -89,11 +91,8 @@ public class Admin extends User {
         role = arrScanner.nextLine();
 
         Admin a = new Admin(username, password, fullName, role);
-
         return a;
     }
-
-
     public static void deleteUser(String i) {
         try {
             String query = "SELECT * FROM users WHERE username='" + i + "'";
@@ -106,7 +105,6 @@ public class Admin extends User {
                 resultSet.close();
                 adminLogin();
             } else {
-
                 String sql = "DELETE FROM users WHERE username='" + i + "'";
 
                 st = Database.getConnect().createStatement();
@@ -119,8 +117,6 @@ public class Admin extends User {
                 sqlEx.printStackTrace();
         }
     }
-
-
     public static void getUser() {
         try {
             String query = "SELECT * FROM users";

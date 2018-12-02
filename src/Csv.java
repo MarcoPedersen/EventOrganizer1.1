@@ -151,6 +151,37 @@ public class Csv {
             ex.printStackTrace();
         }
     }
+    public static void importUsers() {
+
+        try {
+            BufferedReader bReader = new BufferedReader(new FileReader("resources/ExportUsers.csv"));
+
+            while (bReader != null) {
+                String read;
+                try {
+                    read = bReader.readLine();
+                    if (read != null)
+                    {
+                        String[] array = read.split(",+");
+                        Admin admin = new Admin(array[0], array[1], array[2], array[3]);
+                        Database.userToDatabase(admin);
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                finally
+                {
+                    if (bReader == null)
+                    {
+                        bReader.close();
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public static void importEvent() {
 
         try {
