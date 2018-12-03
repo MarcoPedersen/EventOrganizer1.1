@@ -71,6 +71,10 @@ public class Csv {
                 fw.append(rs.getString(6));
                 fw.append(',');
                 fw.append(rs.getString(7));
+                fw.append(',');
+                fw.append(rs.getString(8));
+                fw.append(',');
+                fw.append(rs.getString(9));
                 fw.append('\n');
             }
 
@@ -82,8 +86,8 @@ public class Csv {
                 i.printStackTrace();
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException i) {
+            i.printStackTrace();
         }
     }
 
@@ -117,8 +121,8 @@ public class Csv {
                 i.printStackTrace();
             }
 
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } catch (SQLException i) {
+                i.printStackTrace();
          }
         }
     public static void importArrangement() {
@@ -131,8 +135,8 @@ public class Csv {
                 Database.insertArrangement(arrangement," Din CSV fil er nu importeret", false);
             }
             br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException i) {
+            i.printStackTrace();
         }
     }
     public static void importUsers() {
@@ -145,8 +149,8 @@ public class Csv {
                 Database.userToDatabase(admin, false);
             }
             br.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (IOException i) {
+            i.printStackTrace();
         }
     }
 
@@ -156,12 +160,12 @@ public class Csv {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] array = line.split(",");
-                Event event = new Event(array[0], array[1], array[2], array[3], array[4], array[5]);
+                Event event = new Event(array[0], array[1], array[2], array[3], array[4], array[5], array[6], array[7]);
                 Database.eventToDatabase(event,false);
             }
             br.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (IOException i) {
+            i.printStackTrace();
         }
     }
 }

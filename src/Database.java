@@ -90,8 +90,9 @@ public class Database {
 
     public static void insertArrangement (Arrangement a, String message, boolean returnAfter) {
         try {
-            String sql =    "INSERT INTO `arrangement`(`id`, `aName`, `aStart`, `aEnd`, `aPrice`,`attendees`) VALUES (null, \""
-                    + a.getName() + "\", \"" + a.getStart() + "\", \"" + a.getEnd() + "\", \"" + a.getPrice() + "\", \"" + a.getAttendees() + "\")";
+            String sql =    "INSERT INTO `arrangement`(`id`, `aName`, `aStart`, `aEnd`, `aPrice`,`attendees`) VALUES  (null, \""
+                    + a.getName() + "\", \"" + a.getStart() + "\", \"" + a.getEnd() + "\", \"" + a.getPrice() + "\", \"" + a.getAttendees() + "\")  ON DUPLICATE KEY UPDATE aName =\"" + a.getName() + "\", " +
+                    "aStart=\"" + a.getStart() + "\", aEnd=\"" + a.getEnd() + "\", aPrice=\"" + a.getPrice() + "\", attendees=\"" + a.getAttendees() + "\"";
 
             st = Database.getConnect().createStatement();
             st.execute(sql);
@@ -126,9 +127,11 @@ public class Database {
 
     public static void eventToDatabase(Event e,boolean returnAfter) {
         try {
-            String sql =    "INSERT INTO `event`(`id`, `eName`, `eDescription`, `eType`,`eFacilitator`,`eText`,`arrangement`) " +
+            String sql =    "INSERT INTO `event`(`id`, `eName`, `eDescription`, `eType`,`eFacilitator`,`eText`,`arrangement`,`eDuration`, `ePrice`) " +
                     "VALUES (null, \"" + e.geteName() + "\", \"" + e.geteDescription() + "\", \"" + e.geteType() + "\", \"" + e.geteFacilitator() +
-                    "\", \"" + e.geteText()+ "\", \"" + e.getArrangement() + "\")";
+                    "\", \"" + e.geteText()+ "\", \"" + e.getArrangement() + "\", \"" + e.geteDuration() + "\", \"" + e.getePrice() + "\") ON DUPLICATE KEY UPDATE eName=\"" + e.geteName() + "\", " +
+                    "eDescription=\"" + e.geteDescription() + "\", eType=\"" + e.geteType() + "\", eFacilitator=\"" + e.geteFacilitator() + "\", eText=\"" + e.geteText() + "\", arrangement=\""
+                    + e.getArrangement() + "\", eDuration=\"" + e.geteDuration() + "\", ePrice=\"" + e.getePrice() + "\"";
 
             st = Database.getConnect().createStatement();
             st.execute(sql);
@@ -156,7 +159,7 @@ public class Database {
 
                 String sql = "UPDATE `event` SET `eName`='" + e.geteName() + "', `eDescription`='" + e.geteDescription() + "', `eType`='" + e.geteType()
                         + "', `eFacilitator`='" + e.geteFacilitator() + "',`eText`='" + e.geteText() + "', `arrangement`='" + e.getArrangement()
-                        + "' WHERE `eName`='" + i + "'";
+                        + "', `eDuration`='"+ e.geteDuration() + "', `ePrice`='" + e.getePrice() + "' WHERE `eName`='" + i + "'";
 
                 st = Database.getConnect().createStatement();
                 st.executeUpdate(sql);
@@ -171,7 +174,9 @@ public class Database {
 
     public static void userToDatabase(Admin a, boolean returnAfter) {
         try {
-            String sql = "INSERT INTO `users`(`id`, `username`, `password`, `name`,`role`) VALUES (null, \"" + a.getUsername() + "\", \"" + a.getPassword() + "\", \"" + a.getFullName() + "\", \"" + a.getRole() + "\")";
+            String sql = "INSERT INTO `users`(`id`, `username`, `password`, `name`,`role`) VALUES (null, \"" + a.getUsername() + "\", \""
+                    + a.getPassword() + "\", \"" + a.getFullName() + "\", \"" + a.getRole() + "\") ON DUPLICATE KEY UPDATE username=\""
+                    + a.getUsername() + "\", password=\"" + a.getPassword() + "\", `name`=\"" + a.getFullName() + "\", role=\"" + a.getRole() + "\"";
 
             st = Database.getConnect().createStatement();
             st.execute(sql);
@@ -229,4 +234,60 @@ public class Database {
         }
         return false;
     }
+
+    public static void updateArrangementPrice(String ePrice, String aName) {
+
+        try {
+
+            String query = "SELECT * FROM `arrangement` WHERE `aName`='"+ aName + "'";
+            st = Database.getConnect().createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            if (rs.next()) {
+                String price = rs.getString("aPrice");
+
+                String sql = "UPDATE `arrangement` SET `aPrice`='" + (Double.parseDouble(price) + Double.parseDouble(ePrice)) + "' WHERE `aName`='" + aName + "'";
+
+                st = Database.getConnect().createStatement();
+                st.executeUpdate(sql);
+                st.close();
+            }
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        }
+
+    }
+
+    public static void deleteArrangementPrice(String i) {
+
+        try {
+
+            String query = "SELECT * FROM `event` WHERE `eName`='"+ i + "'";
+            st = Database.getConnect().createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            if (rs.next()) {
+                String price = rs.getString("ePrice");
+                String arrName = rs.getString("arrangement");
+
+                String query2 = "SELECT * FROM `arrangement`";
+                st = Database.getConnect().createStatement();
+                ResultSet rs2 = st.executeQuery(query2);
+
+                if(rs2.next()) {
+                    String aPrice = rs2.getString("aPrice");
+                    String sql = "UPDATE `arrangement` SET `aPrice`='" + (Double.parseDouble(aPrice) - Double.parseDouble(price)) + "' WHERE `aName`='" + arrName + "'";
+
+                    st = Database.getConnect().createStatement();
+                    st.executeUpdate(sql);
+                    st.close();
+                }
+            }
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        }
+
+    }
+
+
 }

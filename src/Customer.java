@@ -35,12 +35,14 @@ public class Customer extends User {
                 String aStart = rs.getString("aStart");
                 String aEnd = rs.getString("aEnd");
                 String attendees = rs.getString("attendees");
+                String price = rs.getString("aPrice");
 
                 System.out.println("--------------------");
-                System.out.println(aName);
-                System.out.println("Arrangementet starter: " +aStart);
-                System.out.println("Arrangementet slutter: " +aEnd);
-                System.out.println("Arrangementets deltagere: " +attendees);
+                System.out.println("Arrangementets navn: " + aName);
+                System.out.println("Arrangementet starter: " + aStart);
+                System.out.println("Arrangementet slutter: " + aEnd);
+                System.out.println("Pris: " + price +" kr.");
+                System.out.println("Arrangementets deltagere: " + attendees);
 
             } else {
                 System.out.println("Du er ikke tilmeldt nogle arrangementer.");

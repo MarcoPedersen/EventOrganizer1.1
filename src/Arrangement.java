@@ -52,10 +52,9 @@ public class Arrangement {
         String aName = arrScanner.nextLine();
         System.out.println("Arrangementets startstidspunkt: ");
         String aStart = arrScanner.nextLine();
+        String aPrice = "100";
         System.out.println("Arrangementets sluttidspunkt: ");
         String aEnd = arrScanner.nextLine();
-        System.out.println("Prisen for arrangementet: ");
-        String aPrice = arrScanner.nextLine();
         System.out.println("Tilmeldte: ");
         String attendees = arrScanner.nextLine();
 
@@ -88,7 +87,6 @@ public class Arrangement {
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
-    }
-
+}
 
 }
