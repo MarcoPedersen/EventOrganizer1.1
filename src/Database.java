@@ -168,6 +168,7 @@ public class Database {
     public static void editEventInDatabase(String i) {
         try {
             String query = "SELECT * FROM event WHERE eName='" + i + "'";
+            st = Database.getConnect().createStatement();
             rs = st.executeQuery(query);
             rs.last();
             if (rs.getRow() == 0) {
@@ -188,7 +189,7 @@ public class Database {
                     Secretary.secretaryLogin();
             }
         } catch(SQLException sqlEx) {
-            System.out.println("Fejl..");
+            sqlEx.printStackTrace();
         }
     }
 

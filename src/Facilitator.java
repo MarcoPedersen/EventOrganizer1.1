@@ -1,15 +1,22 @@
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+
 public class Facilitator extends User {
 
     public static void facilitatorLogin() {
         getEventsToFacilitator(Database.getName());
         Scanner sc = new Scanner(System.in);
-        System.out.println("Vælg hvilket event du vil se information om:");
+        System.out.println("1. Log ud\t 2. Afslut program \nVælg hvilket event du vil se information om:");
         String event = sc.nextLine();
-        getFacilitatorInformation(event);
-        facilitatorLogin();
+        if (event.equals("1")) {
+            ArrangementHandler.arrangementLogin();
+        } else if(event.equals("2")) {
+            System.out.println("Program lukker ned...");
+            System.exit(0);
+        } else {
+            getFacilitatorInformation(event);
+            facilitatorLogin();
+        }
     }
 
     public static void getFacilitatorInformation(String s) {
@@ -25,8 +32,8 @@ public class Facilitator extends User {
                 String arrangement = rs.getString("arrangement");
                 String duration = rs.getString("eDuration");
 
-                System.out.print("Event-navn: " + name + ", Beskrivelse: " + description + ", Event-type: " + type + "" +
-                        ", Løs tekst: " + text + ", Tilknyttet arrangement: " + arrangement + ", Eventets varighed: " + duration);
+                System.out.print("Event-navn: " + name + " \tBeskrivelse: " + description + " \tEvent-type: " + type + "" +
+                        " \tLøs tekst: " + text + " \tTilknyttet arrangement: " + arrangement + " \tEventets varighed: " + duration + " time(r)");
 
                 String query2 = "SELECT * FROM `arrangement` WHERE `aName`='"+ arrangement + "'";
                 setupStatement(query2);
