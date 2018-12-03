@@ -122,7 +122,6 @@ public class Event {
         }
         System.out.println("Løs tekst: ");
         String eText = arrScanner.nextLine();
-        Database.updateArrangementPrice(ePrice, arrangement);
 
         Event event = new Event(eName, eDescription, eType, eFacilitator, eText, arrangement, eDuration, ePrice);
 

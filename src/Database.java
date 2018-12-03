@@ -84,15 +84,11 @@ public class Database {
 
     }
 
-    public static void arrangementToDatabase() {
-        Arrangement a = arrangement.newArrangement();
-    }
-
     public static void insertArrangement (Arrangement a, String message, boolean returnAfter) {
         try {
             String sql =    "INSERT INTO `arrangement`(`id`, `aName`, `aStart`, `aEnd`, `aPrice`,`attendees`) VALUES  (null, \""
                     + a.getName() + "\", \"" + a.getStart() + "\", \"" + a.getEnd() + "\", \"" + a.getPrice() + "\", \"" + a.getAttendees() + "\")  ON DUPLICATE KEY UPDATE aName =\"" + a.getName() + "\", " +
-                    "aStart=\"" + a.getStart() + "\", aEnd=\"" + a.getEnd() + "\", aPrice=\"" + a.getPrice() + "\", attendees=\"" + a.getAttendees() + "\"";
+                    "aStart=\"" + a.getStart() + "\", aEnd=\"" + a.getEnd() + "\", aPrice=\"" + Double.parseDouble(a.getPrice()) + "\", attendees=\"" + a.getAttendees() + "\"";
 
             st = Database.getConnect().createStatement();
             st.execute(sql);
@@ -136,6 +132,29 @@ public class Database {
             st = Database.getConnect().createStatement();
             st.execute(sql);
             System.out.println("Dit event er nu oprettet og hører til arrangementet: " + e.getArrangement());
+            updateArrangementPrice(e.getePrice(), e.getArrangement());
+            st.close();
+            if (returnAfter) {
+                Secretary.secretaryLogin();
+            }
+        } catch (SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }
+
+    }
+
+    public static void eventCSVDatabase(Event e,boolean returnAfter) {
+
+        try {
+            String sql =    "INSERT INTO `event`(`id`, `eName`, `eDescription`, `eType`,`eFacilitator`,`eText`,`arrangement`,`eDuration`, `ePrice`) " +
+                    "VALUES (null, \"" + e.geteName() + "\", \"" + e.geteDescription() + "\", \"" + e.geteType() + "\", \"" + e.geteFacilitator() +
+                    "\", \"" + e.geteText()+ "\", \"" + e.getArrangement() + "\", \"" + e.geteDuration() + "\", \"" + e.getePrice() + "\") ON DUPLICATE KEY UPDATE eName=\"" + e.geteName() + "\", " +
+                    "eDescription=\"" + e.geteDescription() + "\", eType=\"" + e.geteType() + "\", eFacilitator=\"" + e.geteFacilitator() + "\", eText=\"" + e.geteText() + "\", arrangement=\""
+                    + e.getArrangement() + "\", eDuration=\"" + e.geteDuration() + "\", ePrice=\"" + e.getePrice() + "\"";
+
+            st = Database.getConnect().createStatement();
+            st.execute(sql);
+            System.out.println("Dit event er nu oprettet og hører til arrangementet: " + e.getArrangement());
             st.close();
             if (returnAfter) {
                 Secretary.secretaryLogin();
@@ -155,20 +174,21 @@ public class Database {
                 System.out.println("Event findes ikke");
                 Secretary.secretaryLogin();
             } else {
-                Event e = event.newEvent();
+                    Event e = event.newEvent();
+                    String oldPrice = rs.getString("ePrice");
 
-                String sql = "UPDATE `event` SET `eName`='" + e.geteName() + "', `eDescription`='" + e.geteDescription() + "', `eType`='" + e.geteType()
-                        + "', `eFacilitator`='" + e.geteFacilitator() + "',`eText`='" + e.geteText() + "', `arrangement`='" + e.getArrangement()
-                        + "', `eDuration`='"+ e.geteDuration() + "', `ePrice`='" + e.getePrice() + "' WHERE `eName`='" + i + "'";
+                    String sql = "UPDATE `event` SET `eName`='" + e.geteName() + "', `eDescription`='" + e.geteDescription() + "', `eType`='" + e.geteType()
+                            + "', `eFacilitator`='" + e.geteFacilitator() + "',`eText`='" + e.geteText() + "', `arrangement`='" + e.getArrangement()
+                            + "', `eDuration`='" + e.geteDuration() + "', `ePrice`='" + e.getePrice() + "' WHERE `eName`='" + i + "'";
 
-                st = Database.getConnect().createStatement();
-                st.executeUpdate(sql);
-                System.out.println("Dit event er nu redigeret.");
-                st.close();
-                Secretary.secretaryLogin();
+                    st = Database.getConnect().createStatement();
+                    st.executeUpdate(sql);
+                    System.out.println("Dit event er nu redigeret.");
+                    editArrangementPrice(e.getePrice(), e.getArrangement(), oldPrice);
+                    Secretary.secretaryLogin();
             }
         } catch(SQLException sqlEx) {
-            sqlEx.printStackTrace();
+            System.out.println("Fejl..");
         }
     }
 
@@ -289,5 +309,28 @@ public class Database {
 
     }
 
+
+    public static void editArrangementPrice(String ePrice, String aName, String oldPrice) {
+
+        try {
+
+            String query = "SELECT * FROM `arrangement` WHERE `aName`='"+ aName + "'";
+            st = Database.getConnect().createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            if (rs.next()) {
+                String aPrice = rs.getString("aPrice");
+
+                String sql = "UPDATE `arrangement` SET `aPrice`='" + (Double.parseDouble(aPrice) - Double.parseDouble(oldPrice) + Double.parseDouble(ePrice)) + "' WHERE `aName`='" + aName + "'";
+
+                st = Database.getConnect().createStatement();
+                st.executeUpdate(sql);
+                st.close();
+            }
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        }
+
+    }
 
 }

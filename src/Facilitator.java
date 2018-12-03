@@ -9,6 +9,7 @@ public class Facilitator extends User {
         System.out.println("Vælg hvilket event du vil se information om:");
         String event = sc.nextLine();
         getFacilitatorInformation(event);
+        facilitatorLogin();
     }
 
     public static void getFacilitatorInformation(String s) {
@@ -24,12 +25,8 @@ public class Facilitator extends User {
                 String arrangement = rs.getString("arrangement");
                 String duration = rs.getString("eDuration");
 
-                System.out.println("Event-navn: " + name);
-                System.out.println("Beskrivelse: " + description);
-                System.out.println("Event-type: " + type);
-                System.out.println("Løs tekst: " + text);
-                System.out.println("Tilknyttet arrangement: " + arrangement);
-                System.out.println("Eventets varighed: " + duration);
+                System.out.print("Event-navn: " + name + ", Beskrivelse: " + description + ", Event-type: " + type + "" +
+                        ", Løs tekst: " + text + ", Tilknyttet arrangement: " + arrangement + ", Eventets varighed: " + duration);
 
                 String query2 = "SELECT * FROM `arrangement` WHERE `aName`='"+ arrangement + "'";
                 setupStatement(query2);
@@ -41,11 +38,9 @@ public class Facilitator extends User {
                     String aPrice = rs.getString("aPrice");
                     String attendees = rs.getString("attendees");
 
-                    System.out.println("\n" + aName);
-                    System.out.println("Arrangementet starter: " + aStart);
-                    System.out.println("Arrangementet slutter: " + aEnd);
-                    System.out.println("Pris: " + aPrice);
-                    System.out.println("Deltagere: " + attendees);
+                    System.out.println("\n" + "Tilknyttet til arrangementet: " + aName);
+                    System.out.println("Arrangementet starter: " + aStart + ", Arrangementet slutter: " + aEnd + ", Pris: " + aPrice
+                    + ", Deltagere: " + attendees);
 
                 }
 
@@ -64,14 +59,17 @@ public class Facilitator extends User {
             String query = "SELECT `eName` FROM `event` WHERE `eFacilitator`='"+ name + "'";
             setupStatement(query);
 
-            if (rs.next()) {
-                System.out.println("Du er ansvarlig for følgende events: ");
-                String eName = rs.getString("eName");
-                System.out.println(eName);
-
+            rs.last();
+            if (rs.getRow() == 0) {
+                System.out.println("Du er ikke tilknyttet nogle events.");
+                System.exit(0);
             } else {
-                System.out.println("Du er ikke ansvarlig for nogle events - endnu.\nLogger ud...");
-                ArrangementHandler.arrangementLogin();
+                rs.beforeFirst();
+                System.out.println("Du er ansvarlig for følgende events: ");
+                while (rs.next()) {
+                    String eName = rs.getString("eName");
+                    System.out.println(eName);
+                }
             }
 
         } catch (SQLException sqlEx) {

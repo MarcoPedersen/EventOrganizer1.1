@@ -161,7 +161,7 @@ public class Csv {
             while ((line = br.readLine()) != null) {
                 String[] array = line.split(",");
                 Event event = new Event(array[0], array[1], array[2], array[3], array[4], array[5], array[6], array[7]);
-                Database.eventToDatabase(event,false);
+                Database.eventCSVDatabase(event, false);
             }
             br.close();
         } catch (IOException i) {
