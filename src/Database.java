@@ -124,7 +124,7 @@ public class Database {
         }
     }
 
-    public static void eventToDatabase(Event e) {
+    public static void eventToDatabase(Event e,boolean returnAfter) {
         try {
             String sql =    "INSERT INTO `event`(`id`, `eName`, `eDescription`, `eType`,`eFacilitator`,`eText`,`arrangement`) " +
                     "VALUES (null, \"" + e.geteName() + "\", \"" + e.geteDescription() + "\", \"" + e.geteType() + "\", \"" + e.geteFacilitator() +
@@ -134,7 +134,9 @@ public class Database {
             st.execute(sql);
             System.out.println("Dit event er nu oprettet og hører til arrangementet: " + e.getArrangement());
             st.close();
-            Secretary.secretaryLogin();
+            if (returnAfter) {
+                Secretary.secretaryLogin();
+            }
         } catch (SQLException sqlEx){
             sqlEx.printStackTrace();
         }
@@ -167,10 +169,7 @@ public class Database {
         }
     }
 
-    public static void userToDatabase() {
-
-        Admin a = admin.newUser();
-
+    public static void userToDatabase(Admin a, boolean returnAfter) {
         try {
             String sql = "INSERT INTO `users`(`id`, `username`, `password`, `name`,`role`) VALUES (null, \"" + a.getUsername() + "\", \"" + a.getPassword() + "\", \"" + a.getFullName() + "\", \"" + a.getRole() + "\")";
 
@@ -178,7 +177,9 @@ public class Database {
             st.execute(sql);
             System.out.println("Bruger " + a.getUsername() + " er nu oprettet.");
             st.close();
-            Admin.adminLogin();
+            if (returnAfter){
+                Admin.adminLogin();
+            }
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
