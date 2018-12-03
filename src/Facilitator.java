@@ -41,7 +41,7 @@ public class Facilitator extends User {
                     String aPrice = rs.getString("aPrice");
                     String attendees = rs.getString("attendees");
 
-                    System.out.println("\nArrangementets navn: " + aName);
+                    System.out.println("\n" + aName);
                     System.out.println("Arrangementet starter: " + aStart);
                     System.out.println("Arrangementet slutter: " + aEnd);
                     System.out.println("Pris: " + aPrice);
