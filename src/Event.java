@@ -117,7 +117,7 @@ public class Event {
         String eFacilitator = arrScanner.nextLine();
 
         while (!Facilitator.verifyFacilitator(eFacilitator)) {
-            System.out.println("Forkert facilitator - prøv igen.");
+            Facilitator.getFacilitator();
             eFacilitator = arrScanner.nextLine();
         }
         System.out.println("Løs tekst: ");

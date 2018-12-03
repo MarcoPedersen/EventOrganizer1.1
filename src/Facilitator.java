@@ -47,7 +47,6 @@ public class Facilitator extends User {
                     System.out.println("Pris: " + aPrice);
                     System.out.println("Deltagere: " + attendees);
 
-                    Facilitator.facilitatorLogin();
                 }
 
             } else {
@@ -96,20 +95,19 @@ public class Facilitator extends User {
     }
 
     public static boolean verifyFacilitator(String i) {
-        boolean isFacilitator = false;
         try {
-            String query = "SELECT role FROM users WHERE name='"+ i +"'";
+            String query = "SELECT * FROM `users` WHERE `name`='" + i + "' AND `role`='Facilitator'";
             setupStatement(query);
-            ResultSet resultSet = st.executeQuery(query);
-            if (resultSet.getRow() == 0) {
+            rs.last();
+            if (rs.getRow() == 0) {
                 System.out.println("Ingen facilitatorer med dette navn - prøv igen.");
-                isFacilitator = false;
+                return false;
             } else {
-                isFacilitator = true;
+                return true;
             }
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
-        return isFacilitator;
+        return false;
     }
 }
