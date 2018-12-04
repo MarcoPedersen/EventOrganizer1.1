@@ -1,9 +1,9 @@
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class Facilitator extends User {
+public class Facilitator extends User implements Login {
 
-    public static void facilitatorLogin() {
+    public static void login() {
         getEventsToFacilitator(Database.getName());
         Scanner sc = new Scanner(System.in);
         System.out.println("1. Log ud\t 2. Afslut program \nVælg hvilket event du vil se information om:");
@@ -53,7 +53,7 @@ public class Facilitator extends User {
 
             } else {
                 System.out.println("Dette arrangement findes ikke - prøv igen.");
-                Facilitator.facilitatorLogin();
+                login();
             }
 
         } catch (SQLException sqlEx) {

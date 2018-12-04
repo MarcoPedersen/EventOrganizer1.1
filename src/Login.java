@@ -1,4 +1,4 @@
-public interface Login {
+interface Login {
 
     static void login() {
 

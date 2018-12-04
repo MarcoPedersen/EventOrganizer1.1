@@ -1,10 +1,10 @@
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class Secretary extends User {
+public class Secretary extends User implements Login {
 
 
-    public static void secretaryLogin() {
+    public static void login() {
         System.out.println("1. Arrangement-menu \t 2. Event-menu \t 3. Eksporter CSV-fil \t 4. Importer CSV-fil \t 5. Log ud \t 6. Afslut program");
         Scanner menu = new Scanner(System.in);
         String menuChoice = menu.nextLine();
@@ -39,7 +39,7 @@ public class Secretary extends User {
                     break;
                 default:
                     System.out.println("Ikke en valgmulighed - prøv igen.");
-                    secretaryLogin();
+                    login();
                     break;
             }
         } else if (menuChoice.equals("2")) {
@@ -84,7 +84,7 @@ public class Secretary extends User {
             Csv.importArrangement();
             Csv.importEvent();
             Csv.importUsers();
-            Secretary.secretaryLogin();
+            login();
         } else if (menuChoice.equals("5")) {
             ArrangementHandler.arrangementLogin();
         } else if (menuChoice.equals("6")){
@@ -92,7 +92,7 @@ public class Secretary extends User {
             System.exit(0);
         } else {
             System.out.println("Ikke en valgmulighed.");
-            secretaryLogin();
+            login();
         }
     }
 }

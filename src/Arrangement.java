@@ -69,7 +69,7 @@ public class Arrangement {
         st = Database.getConnect().createStatement();
         st.execute(sql);
         System.out.println("Dit arrangement er nu slettet.");
-        Secretary.secretaryLogin();
+        Secretary.login();
         st.close();
     }
 

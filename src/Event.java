@@ -80,7 +80,7 @@ public class Event {
 
         if(!Database.arrangementExists(arrangement)) {
             System.out.println("Dette arrangement eksisterer ikke");
-            Secretary.secretaryLogin();
+            Secretary.login();
         }
 
         System.out.println("Navn på eventet: ");
@@ -136,7 +136,7 @@ public class Event {
         st.execute(sql);
         System.out.println("Dit event er nu slettet.");
         st.close();
-        Secretary.secretaryLogin();
+        Secretary.login();
     }
 
     public static void getEvent() {

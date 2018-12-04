@@ -1,7 +1,7 @@
 import java.sql.*;
 import java.util.Scanner;
 
-public class Admin extends User {
+public class Admin extends User implements Login {
 
     private static String username;
     private static String password;
@@ -35,7 +35,7 @@ public class Admin extends User {
         return role;
     }
 
-    public static void adminLogin() {
+    public static void login() {
         System.out.println("1. Tilføj bruger \t 2. Redigér bruger \t 3. Slet bruger \t 4. Log ud \t 5. Afslut program");
         Scanner choice = new Scanner(System.in);
         String userChoice = choice.nextLine();
@@ -47,7 +47,7 @@ public class Admin extends User {
                 break;
 
             case "2":
-                System.out.println("Hvilken bruger du vil redigere - skriv kun navn:");
+                System.out.println("Hvilken bruger vil du redigere - skriv kun navn:");
                 getUser();
                 Scanner edit = new Scanner(System.in);
                 String i = edit.nextLine();
@@ -56,7 +56,7 @@ public class Admin extends User {
                 break;
 
             case "3":
-                System.out.println("Hvilken bruger du vil slette - skriv kun navn:");
+                System.out.println("Hvilken bruger vil du slette - skriv kun navn:");
                 getUser();
                 Scanner delete = new Scanner(System.in);
                 String j = delete.nextLine();
@@ -71,7 +71,7 @@ public class Admin extends User {
                 System.exit(0);
             default:
                 System.out.println("Ikke en valgmulighed.");
-                adminLogin();
+                login();
                 break;
         }
     }
@@ -125,7 +125,7 @@ public class Admin extends User {
                 System.out.println("Ingen brugere med dette navn.");
                 st.close();
                 resultSet.close();
-                adminLogin();
+                login();
             } else {
                 String sql = "DELETE FROM users WHERE username='" + i + "'";
 
@@ -133,7 +133,7 @@ public class Admin extends User {
                 st.execute(sql);
                 System.out.println("Brugeren " + i + " er nu slettet.");
                 st.close();
-                adminLogin();
+                login();
             }
         } catch(SQLException sqlEx){
                 sqlEx.printStackTrace();

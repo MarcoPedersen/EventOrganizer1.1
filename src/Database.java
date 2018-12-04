@@ -58,16 +58,16 @@ public class Database {
                     System.out.println("Velkommen, " + name + ". Din rolle er: " + role);
                     switch (role) {
                         case "Secretary":
-                            Secretary.secretaryLogin();
+                            Secretary.login();
                             break;
                         case "Facilitator":
-                            Facilitator.facilitatorLogin();
+                            Facilitator.login();
                             break;
                         case "Customer":
                             Customer.customerLogin(name);
                             break;
                         case "Admin":
-                            Admin.adminLogin();
+                            Admin.login();
                             break;
                         default:
                             System.out.println("Ikke gyldig rolle - prøv venligst igen");
@@ -96,7 +96,7 @@ public class Database {
             st.close();
 
             if(returnAfter) {
-                Secretary.secretaryLogin();
+                Secretary.login();
             }
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
@@ -115,7 +115,7 @@ public class Database {
             st.executeUpdate(sql);
             System.out.println("Dit arrangement er nu redigeret.");
             st.close();
-            Secretary.secretaryLogin();
+            Secretary.login();
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
@@ -135,7 +135,7 @@ public class Database {
             updateArrangementPrice(e.getePrice(), e.getArrangement());
             st.close();
             if (returnAfter) {
-                Secretary.secretaryLogin();
+                Secretary.login();
             }
         } catch (SQLException sqlEx){
             sqlEx.printStackTrace();
@@ -157,7 +157,7 @@ public class Database {
             System.out.println("Dit event er nu oprettet og hører til arrangementet: " + e.getArrangement());
             st.close();
             if (returnAfter) {
-                Secretary.secretaryLogin();
+                Secretary.login();
             }
         } catch (SQLException sqlEx){
             sqlEx.printStackTrace();
@@ -173,7 +173,7 @@ public class Database {
             rs.last();
             if (rs.getRow() == 0) {
                 System.out.println("Event findes ikke");
-                Secretary.secretaryLogin();
+                Secretary.login();
             } else {
                     Event e = event.newEvent();
                     String oldPrice = rs.getString("ePrice");
@@ -186,7 +186,7 @@ public class Database {
                     st.executeUpdate(sql);
                     System.out.println("Dit event er nu redigeret.");
                     editArrangementPrice(e.getePrice(), e.getArrangement(), oldPrice);
-                    Secretary.secretaryLogin();
+                    Secretary.login();
             }
         } catch(SQLException sqlEx) {
             sqlEx.printStackTrace();
@@ -204,7 +204,7 @@ public class Database {
             System.out.println("Bruger " + a.getUsername() + " er nu oprettet.");
             st.close();
             if (returnAfter){
-                Admin.adminLogin();
+                Admin.login();
             }
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
@@ -221,7 +221,7 @@ public class Database {
                 System.out.println("Ingen brugere med dette navn.");
                 st.close();
                 resultSet.close();
-                Admin.adminLogin();
+                Admin.login();
             } else {
                 Admin a = admin.newUser();
                 String sql = "UPDATE `users` SET `username`='"+ a.getUsername() + "', `password`='" + a.getPassword() +"', `name`='"+ a.getFullName() + "', `role`='" + a.getRole() + "' WHERE `username`='"+ i +"'";
@@ -230,7 +230,7 @@ public class Database {
                 st.executeUpdate(sql);
                 System.out.println("Brugeroplysningerne er nu opdateret.");
                 st.close();
-                Admin.adminLogin();
+                Admin.login();
             }
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
