@@ -87,9 +87,31 @@ public class Admin extends User {
         password = arrScanner.nextLine();
         System.out.println("Fulde navn: ");
         fullName = arrScanner.nextLine();
-        System.out.println("Rolle: ");
-        role = arrScanner.nextLine();
-
+        System.out.println("Rolle - 1. Customer\t 2. Facilitator\t 3. Secretary\t 4. Admin");
+        boolean hasRole = false;
+        while (!hasRole) {
+            String roleChoice = arrScanner.nextLine();
+            switch (roleChoice) {
+                case "1":
+                    role = "Customer";
+                    hasRole = true;
+                    break;
+                case "2":
+                    role = "Facilitator";
+                    hasRole = true;
+                    break;
+                case "3":
+                    role = "Secretary";
+                    hasRole = true;
+                    break;
+                case "4":
+                    role = "Admin";
+                    hasRole = true;
+                    break;
+                default:
+                    System.out.println("Ikke en valgmulighed - prøv igen.");
+            }
+        }
         Admin a = new Admin(username, password, fullName, role);
         return a;
     }
