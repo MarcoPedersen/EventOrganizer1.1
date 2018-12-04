@@ -244,8 +244,6 @@ public class Database {
             ResultSet rs = st.executeQuery(sql);
             rs.last();
             if(rs.getRow() == 0) {
-                rs.close();
-                st.close();
                 return false;
             } else {
                 return true;

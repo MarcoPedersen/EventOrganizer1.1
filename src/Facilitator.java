@@ -65,11 +65,18 @@ public class Facilitator extends User {
         try {
             String query = "SELECT `eName` FROM `event` WHERE `eFacilitator`='"+ name + "'";
             setupStatement(query);
-
             rs.last();
             if (rs.getRow() == 0) {
-                System.out.println("Du er ikke tilknyttet nogle events.");
-                System.exit(0);
+                System.out.println("Du er ikke ansvarlig for nogle events - endnu.\n1. Log ud\t 2. Afslut program");
+                Scanner sc = new Scanner(System.in);
+                String choice = sc.nextLine();
+                if (choice.equals("1")) {
+                    ArrangementHandler.arrangementLogin();
+                } else if(choice.equals("2")) {
+                    System.exit(0);
+                } else {
+                    System.out.println("Ikke en valgmulighed - prøv igen.");
+                }
             } else {
                 rs.beforeFirst();
                 System.out.println("Du er ansvarlig for følgende events: ");
@@ -78,7 +85,6 @@ public class Facilitator extends User {
                     System.out.println(eName);
                 }
             }
-
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
