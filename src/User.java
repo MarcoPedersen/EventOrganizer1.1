@@ -2,7 +2,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class User {
+public abstract class User {
 
     static Statement st;
     static ResultSet rs;

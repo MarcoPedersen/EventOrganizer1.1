@@ -47,7 +47,7 @@ public class Admin extends User {
                 break;
 
             case "2":
-                System.out.println("Vælg hvilken bruger du vil redigere:");
+                System.out.println("Hvilken bruger du vil redigere - skriv kun navn:");
                 getUser();
                 Scanner edit = new Scanner(System.in);
                 String i = edit.nextLine();
@@ -56,7 +56,7 @@ public class Admin extends User {
                 break;
 
             case "3":
-                System.out.println("Vælg hvilken bruger du vil slette:");
+                System.out.println("Hvilken bruger du vil slette - skriv kun navn:");
                 getUser();
                 Scanner delete = new Scanner(System.in);
                 String j = delete.nextLine();
@@ -87,7 +87,7 @@ public class Admin extends User {
         password = arrScanner.nextLine();
         System.out.println("Fulde navn: ");
         fullName = arrScanner.nextLine();
-        System.out.println("Rolle - 1. Customer\t 2. Facilitator\t 3. Secretary\t 4. Admin");
+        System.out.println("Rolle:\t 1. Customer\t2. Facilitator\t  3. Secretary\t 4. Admin");
         boolean hasRole = false;
         while (!hasRole) {
             String roleChoice = arrScanner.nextLine();
@@ -146,8 +146,9 @@ public class Admin extends User {
 
             while (rs.next()) {
                 String username = rs.getString("username");
+                String role = rs.getString("role");
                 System.out.println("-----------------");
-                System.out.println(username);
+                System.out.println(username + " - " + role);
             }
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
