@@ -15,7 +15,7 @@ public class Facilitator extends User {
             System.exit(0);
         } else {
             getFacilitatorInformation(event);
-            facilitatorLogin();
+
         }
     }
 
@@ -32,8 +32,8 @@ public class Facilitator extends User {
                 String arrangement = rs.getString("arrangement");
                 String duration = rs.getString("eDuration");
 
-                System.out.print("Event-navn: " + name + " \tBeskrivelse: " + description + " \tEvent-type: " + type + "" +
-                        " \tLøs tekst: " + text + " \tTilknyttet arrangement: " + arrangement + " \tEventets varighed: " + duration + " time(r)");
+                System.out.print("Event-navn: " + name + " \nBeskrivelse: " + description + " \nEvent-type: " + type + "" +
+                        " \nLøs tekst: " + text + " \nTilknyttet arrangement: " + arrangement + " \nEventets varighed: " + duration + " time(r)");
 
                 String query2 = "SELECT * FROM `arrangement` WHERE `aName`='"+ arrangement + "'";
                 setupStatement(query2);
@@ -46,8 +46,8 @@ public class Facilitator extends User {
                     String attendees = rs.getString("attendees");
 
                     System.out.println("\n" + "Tilknyttet til arrangementet: " + aName);
-                    System.out.println("Arrangementet starter: " + aStart + ", Arrangementet slutter: " + aEnd + ", Pris: " + aPrice
-                    + ", Deltagere: " + attendees);
+                    System.out.println("\nArrangementet starter: " + aStart + "\nArrangementet slutter: " + aEnd + "\nPris: " + aPrice
+                    + "\nDeltagere: " + attendees);
 
                 }
 
@@ -83,6 +83,7 @@ public class Facilitator extends User {
                 while (rs.next()) {
                     String eName = rs.getString("eName");
                     System.out.println(eName);
+                    System.out.println("----------------");
                 }
             }
         } catch (SQLException sqlEx) {
