@@ -195,8 +195,8 @@ public class Database {
 
     public static void userToDatabase(Admin a, boolean returnAfter) {
         try {
-            String sql = "INSERT INTO `users`(`id`, `username`, `password`, `name`,`role`) VALUES (null, \"" + a.getUsername() + "\", \""
-                    + a.getPassword() + "\", \"" + a.getFullName() + "\", \"" + a.getRole() + "\") ON DUPLICATE KEY UPDATE username=\""
+            String sql = "INSERT INTO `users`(`id`, `username`, `password`, `name`,`role`) VALUES (null, \"" + a.getUsername().toLowerCase() + "\", \""
+                    + a.getPassword().toLowerCase() + "\", \"" + a.getFullName() + "\", \"" + a.getRole() + "\") ON DUPLICATE KEY UPDATE username=\""
                     + a.getUsername() + "\", password=\"" + a.getPassword() + "\", `name`=\"" + a.getFullName() + "\", role=\"" + a.getRole() + "\"";
 
             st = Database.getConnect().createStatement();
