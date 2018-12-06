@@ -1,5 +1,6 @@
 public class Salary {
 
+    // regner timeløn ud fra hver påbegyndte halve time
     public String calculateSalary(String hours, boolean isWeekend) {
         double time = Double.parseDouble(hours);
         double totalSalary;

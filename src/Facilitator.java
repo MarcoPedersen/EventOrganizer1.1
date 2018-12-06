@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Facilitator extends User implements Login {
 
+    // facilitator login-side
     public static void login() {
         getEventsToFacilitator(Database.getName());
         Scanner sc = new Scanner(System.in);
@@ -19,6 +20,7 @@ public class Facilitator extends User implements Login {
         }
     }
 
+    // henter information om et af de events som facilitatoren er meldt til
     public static void getFacilitatorInformation(String s) {
         try {
             String query = "SELECT * FROM `event` WHERE `eName`='"+ s + "'";
@@ -61,6 +63,7 @@ public class Facilitator extends User implements Login {
         }
     }
 
+    // henter de events fra databasen som tilhører facilitatoren
     public static void getEventsToFacilitator(String name) {
         try {
             String query = "SELECT `eName` FROM `event` WHERE `eFacilitator`='"+ name + "'";
@@ -91,6 +94,7 @@ public class Facilitator extends User implements Login {
         }
     }
 
+    // henter facilitatorinformation
     public static void getFacilitator() {
         try {
             String query = "SELECT * FROM users WHERE role='Facilitator'";
@@ -106,6 +110,7 @@ public class Facilitator extends User implements Login {
         }
     }
 
+    // checker om facilitatoren findes i databasen
     public static boolean verifyFacilitator(String i) {
         try {
             String query = "SELECT * FROM `users` WHERE `name`='" + i + "' AND `role`='Facilitator'";

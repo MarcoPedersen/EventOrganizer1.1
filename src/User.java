@@ -8,6 +8,7 @@ public abstract class User {
     static ResultSet rs;
 
 
+    // opretter et statement til databasen
     public static void setupStatement(String query) {
         try {
             st = Database.getConnect().createStatement();

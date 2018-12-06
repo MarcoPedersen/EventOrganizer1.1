@@ -35,6 +35,7 @@ public class Admin extends User implements Login {
         return role;
     }
 
+    // login-metoden er en navigator for admin
     public static void login() {
         System.out.println("1. Tilføj bruger \t 2. Redigér bruger \t 3. Slet bruger \t 4. Log ud \t 5. Afslut program");
         Scanner choice = new Scanner(System.in);
@@ -76,6 +77,7 @@ public class Admin extends User implements Login {
         }
     }
 
+    // opretter en ny bruger med én af fire forskellige roller - bruges også til redigering af brugere
     public Admin newUser() {
 
         System.out.println("Udfyld felterne:");
@@ -115,6 +117,8 @@ public class Admin extends User implements Login {
         Admin a = new Admin(username, password, fullName, role);
         return a;
     }
+
+    //sletter brugere
     public static void deleteUser(String i) {
         try {
             String query = "SELECT * FROM users WHERE username='" + i + "'";
@@ -139,6 +143,8 @@ public class Admin extends User implements Login {
                 sqlEx.printStackTrace();
         }
     }
+
+    // henter bruger-information fra databasen
     public static void getUser() {
         try {
             String query = "SELECT * FROM users";

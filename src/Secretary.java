@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Secretary extends User implements Login {
 
 
+    // Secretary login-side
     public static void login() {
         System.out.println("1. Arrangement-menu \t 2. Event-menu \t 3. Eksporter CSV-fil \t 4. Importer CSV-fil \t 5. Log ud \t 6. Afslut program");
         Scanner menu = new Scanner(System.in);

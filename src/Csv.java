@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 public class Csv {
 
+    // eksporterer arrangementer til en CSV-fil i resources databasen
     public static void exportArrangement() {
 
         try {
@@ -50,6 +51,7 @@ public class Csv {
         }
     }
 
+    // eksporterer events til en CSV-fil i resources fra databasen
     public static void exportEvent() {
 
         try {
@@ -93,6 +95,7 @@ public class Csv {
         }
     }
 
+    // eksporterer brugere til en CSV-fil i resources fra databasen
     public static void exportUsers() {
 
         try {
@@ -126,7 +129,9 @@ public class Csv {
             } catch (SQLException i) {
                 i.printStackTrace();
          }
-        }
+    }
+
+    // importerer arrangementer fra en CSV-fil i resources til databasen
     public static void importArrangement() {
         try {
             BufferedReader br = new BufferedReader(new FileReader("resources/ExportArrangement.csv"));
@@ -141,6 +146,8 @@ public class Csv {
             i.printStackTrace();
         }
     }
+
+    // importerer brugere fra en CSV-fil i resources til databasen
     public static void importUsers() {
         try {
             BufferedReader br = new BufferedReader(new FileReader("resources/ExportUsers.csv"));
@@ -156,6 +163,7 @@ public class Csv {
         }
     }
 
+    // importerer events fra en CSV-fil i resources til databasen
     public static void importEvent() {
         try {
             BufferedReader br = new BufferedReader(new FileReader("resources/ExportEvent.csv"));

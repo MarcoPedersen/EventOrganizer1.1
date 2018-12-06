@@ -18,6 +18,7 @@ public class Event {
     public Event() {
 
     }
+
     public Event(String eName, String eDescription, String eType, String eFacilitator, String eText, String arrangement, String eDuration, String ePrice) {
         this.eName = eName;
         this.eDescription = eDescription;
@@ -70,6 +71,7 @@ public class Event {
         return true;
     }
 
+    // bruges til at oprette et nyt event eller redigere et event
     public Event newEvent() {
 
         Scanner arrScanner = new Scanner(System.in);
@@ -129,6 +131,7 @@ public class Event {
 
     }
 
+    // sletter et event i databasen
     public static void deleteEvent(String i) throws SQLException {
         String sql = "DELETE FROM event WHERE eName='"+ i + "'";
         Database.deleteArrangementPrice(i);
@@ -139,6 +142,7 @@ public class Event {
         Secretary.login();
     }
 
+    // henter information om et event fra databasen
     public static void getEvent() {
         try {
             String query = "SELECT * FROM event";

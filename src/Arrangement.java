@@ -43,11 +43,11 @@ public class Arrangement {
         return attendees;
     }
 
+    // opretter et nyt arrangement - bruges også til redigering af arrangementer
     public Arrangement newArrangement() {
 
         System.out.println("Udfyld felterne:");
         Scanner arrScanner = new Scanner(System.in);
-
         System.out.println("Navn på arrangement: ");
         String aName = arrScanner.nextLine();
         System.out.println("Arrangementets startstidspunkt: ");
@@ -63,6 +63,7 @@ public class Arrangement {
         return arrangement;
     }
 
+    // sletter arrangementer
     public void deleteArrangement(String i) throws SQLException {
 
         String sql = "DELETE FROM arrangement WHERE aName='"+ i + "'";
@@ -73,6 +74,7 @@ public class Arrangement {
         st.close();
     }
 
+    // henter arrangementer på databasen
     public static void getArrangements() {
         try {
             String query = "SELECT * FROM arrangement";

@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Customer extends User implements Login {
 
-
+    // kundens login-side
     public static void login(String n) {
 
         System.out.println("Arrangementer du er tilmeldt til:");
@@ -25,6 +25,7 @@ public class Customer extends User implements Login {
         }
     }
 
+    // henter kunders information fra databasen
     public static void getCustomer(String s) {
         try {
             String query = "SELECT * FROM `arrangement` WHERE `attendees` LIKE '%"+ s +"%'";

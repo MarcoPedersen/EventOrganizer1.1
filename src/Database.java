@@ -23,6 +23,7 @@ public class Database {
         return name;
     }
 
+    // opretter en connection til databasen
     public static void connectToDatabase() {
         try {
             st = getConnect().createStatement();
@@ -31,10 +32,12 @@ public class Database {
         }
     }
 
+    // returnerer en connection til databasen
     public static Connection getConnect() throws SQLException {
         return connect = DriverManager.getConnection(getUrl(), "thomas", "123456");
     }
 
+    // metoden der checker om brugeren findes og definerer login-siden altefter hvilken rolle brugeren har
     public static void userLogin(String u, String p) {
         try {
             String query = "SELECT * FROM users WHERE username='"+ u + "' and password='"+ p +"'";
@@ -84,6 +87,8 @@ public class Database {
 
     }
 
+
+    // indsætter arrangementet i databasen
     public static void insertArrangement (Arrangement a, String message, boolean returnAfter) {
         try {
             String sql =    "INSERT INTO `arrangement`(`id`, `aName`, `aStart`, `aEnd`, `aPrice`,`attendees`) VALUES  (null, \""
@@ -103,6 +108,7 @@ public class Database {
         }
     }
 
+    // retter et arrangement i databasen
     public static void editArrangementInDatabase(String i) {
         try {
 
@@ -121,6 +127,7 @@ public class Database {
         }
     }
 
+    // indsætter et event i databasen
     public static void eventToDatabase(Event e,boolean returnAfter) {
         try {
             String sql =    "INSERT INTO `event`(`id`, `eName`, `eDescription`, `eType`,`eFacilitator`,`eText`,`arrangement`,`eDuration`, `ePrice`) " +
@@ -143,6 +150,7 @@ public class Database {
 
     }
 
+    // importerer event fra CSV til database
     public static void eventCSVDatabase(Event e,boolean returnAfter) {
 
         try {
@@ -165,6 +173,7 @@ public class Database {
 
     }
 
+    // retter et event i databasen
     public static void editEventInDatabase(String i) {
         try {
             String query = "SELECT * FROM event WHERE eName='" + i + "'";
@@ -193,6 +202,7 @@ public class Database {
         }
     }
 
+    // opretter bruger i databasen
     public static void userToDatabase(Admin a, boolean returnAfter) {
         try {
             String sql = "INSERT INTO `users`(`id`, `username`, `password`, `name`,`role`) VALUES (null, \"" + a.getUsername().toLowerCase() + "\", \""
@@ -211,6 +221,7 @@ public class Database {
         }
     }
 
+    // retter en bruger i databasen
     public static void editUserInDatabase(String i) {
         try {
             String query = "SELECT * FROM users WHERE username='" + i + "'";
@@ -237,6 +248,7 @@ public class Database {
         }
     }
 
+    // checker om et arrangement eksisterer i databasen
     public static boolean arrangementExists(String arr) {
         String sql = "SELECT * FROM arrangement WHERE aName='" + arr + "'";
         try {
@@ -254,6 +266,7 @@ public class Database {
         return false;
     }
 
+    // opdaterer prisen i et arrangement, når der bliver tilføjet et event
     public static void updateArrangementPrice(String ePrice, String aName) {
 
         try {
@@ -277,6 +290,7 @@ public class Database {
 
     }
 
+    // sletter prisen i et arrangement, når der bliver slettet et event
     public static void deleteArrangementPrice(String i) {
 
         try {
@@ -309,6 +323,7 @@ public class Database {
     }
 
 
+    // retter prisen i et arrangement, når der bliver rettet i et event
     public static void editArrangementPrice(String ePrice, String aName, String oldPrice) {
 
         try {

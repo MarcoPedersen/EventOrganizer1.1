@@ -5,6 +5,7 @@ public class ArrangementHandler {
         arrangementLogin();
     }
 
+    // Startpunktet, hvor man også lander, hvis man logger ud
     public static void arrangementLogin() {
         Database.connectToDatabase();
         Scanner login = new Scanner(System.in);
