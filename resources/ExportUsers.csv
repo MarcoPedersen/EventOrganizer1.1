@@ -1,8 +1,10 @@
-a,a,Test-admin,Admin
-s,s,s,Secretary
-f,f,f,Facilitator
-c,c,Test-customer,Customer
-l,lort,Lars,Customer
-thomas,vindelev,Thomas Vindelev,Facilitator
-v,v,Vincent,Facilitator
-b,lort,Lars,Customer
+a,a,Admin,Admin
+marco,pedersen,Marco Pedersen,Secretary
+nick,hansen,Nick Hansen,Facilitator
+Thomas,vindelev,Thomas Vindelev,Customer
+frank,sørensen,Frank Sørensen,Customer
+frederik,lønborg,Frederik Lønborg,Customer
+bente,hansen,Bente Hansen,Customer
+ninett,pedersen,Ninett Pedersen,Customer
+janus,lærer,Janus lærer,Secretary
+hardy,lærer,Hardy lærer,Admin

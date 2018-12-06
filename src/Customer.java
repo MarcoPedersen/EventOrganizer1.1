@@ -1,10 +1,10 @@
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class Customer extends User {
+public class Customer extends User implements Login {
 
 
-    public static void customerLogin(String n) {
+    public static void login(String n) {
 
         System.out.println("Arrangementer du er tilmeldt til:");
         getCustomer(n);

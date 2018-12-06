@@ -2,7 +2,7 @@ public class Salary {
 
     public String calculateSalary(String hours, boolean isWeekend) {
         double time = Double.parseDouble(hours);
-        double totalSalary = 0;
+        double totalSalary;
         if(isWeekend) {
             if(time%0.5 != 0) {
                 double timeLeft = time - time%1;

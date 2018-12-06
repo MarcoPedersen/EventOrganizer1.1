@@ -11,7 +11,9 @@ public class Csv {
     public static void exportArrangement() {
 
         try {
+
             try {
+
                 String arrfile ="resources/ExportArrangement.csv";
 
                 Database.connectToDatabase();
@@ -53,11 +55,11 @@ public class Csv {
         try {
             try {
 
-        String evefile ="resources/ExportEvent.csv";
-        FileWriter fw = new FileWriter(evefile);
-        String query2 = "select * from `event`";
-        Statement st = Database.getConnect().createStatement();
-        ResultSet rs = st.executeQuery(query2);
+            String evefile ="resources/ExportEvent.csv";
+            FileWriter fw = new FileWriter(evefile);
+            String query2 = "select * from `event`";
+            Statement st = Database.getConnect().createStatement();
+            ResultSet rs = st.executeQuery(query2);
 
             while (rs.next()) {
                 fw.append(rs.getString(2));

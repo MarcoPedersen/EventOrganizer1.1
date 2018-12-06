@@ -64,7 +64,7 @@ public class Database {
                             Facilitator.login();
                             break;
                         case "Customer":
-                            Customer.customerLogin(name);
+                            Customer.login(name);
                             break;
                         case "Admin":
                             Admin.login();
