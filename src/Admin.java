@@ -37,7 +37,7 @@ public class Admin extends User implements Login {
 
     // login-metoden er en navigator for admin
     public static void login() {
-        System.out.println("1. Tilføj bruger \t 2. Redigér bruger \t 3. Slet bruger \t 4. Log ud \t 5. Afslut program");
+        System.out.println("1. Tilføj bruger\t 2. Redigér bruger \t 3. Slet bruger\t 4. Log ud \t 5. Afslut program");
         Scanner choice = new Scanner(System.in);
         String userChoice = choice.nextLine();
         switch (userChoice) {

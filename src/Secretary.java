@@ -12,70 +12,89 @@ public class Secretary extends User implements Login {
         Arrangement arrangement = new Arrangement();
         if (menuChoice.equals("1")) {
 
-            System.out.println("1. Tilføj arrangement \t 2. Rediger arrangement \t 3. Slet arrangement");
+            System.out.println("1. Tilføj arrangement \t 2. Rediger arrangement \t 3. Slet arrangement \t 4. Tilbage");
             Scanner choice = new Scanner(System.in);
-            String userChoice = choice.nextLine();
-            switch (userChoice) {
-                case "1":
-                    Arrangement a = arrangement.newArrangement();
-                    Database.insertArrangement(a, "Dit arrangement er nu oprettet", true);
-                    break;
-                case "2":
-                    System.out.println("Vælg hvilket arrangement du vil redigere:");
-                    Arrangement.getArrangements();
-                    Scanner edit = new Scanner(System.in);
-                    String i = edit.nextLine();
-                    Database.editArrangementInDatabase(i);
-                    break;
-                case "3":
-                    System.out.println("Vælg hvilket arrangement du vil slette:");
-                    arrangement.getArrangements();
-                    Scanner delete = new Scanner(System.in);
-                    String j = delete.nextLine();
-                    try {
-                        arrangement.deleteArrangement(j.toLowerCase());
-                    } catch (SQLException sqlEx) {
-                        sqlEx.printStackTrace();
-                    }
-                    break;
-                default:
-                    System.out.println("Ikke en valgmulighed - prøv igen.");
-                    login();
-                    break;
+            boolean isChoice = false;
+            while (!isChoice) {
+                String userChoice = choice.nextLine();
+                switch (userChoice) {
+                    case "1":
+                        isChoice = true;
+                        Arrangement a = arrangement.newArrangement();
+                        Database.insertArrangement(a, "Dit arrangement er nu oprettet", true);
+                        break;
+                    case "2":
+                        isChoice = true;
+                        System.out.println("Vælg hvilket arrangement du vil redigere:");
+                        Arrangement.getArrangements();
+                        Scanner edit = new Scanner(System.in);
+                        String i = edit.nextLine();
+                        Database.editArrangementInDatabase(i);
+                        break;
+                    case "3":
+                        isChoice = true;
+                        System.out.println("Vælg hvilket arrangement du vil slette:");
+                        arrangement.getArrangements();
+                        Scanner delete = new Scanner(System.in);
+                        String j = delete.nextLine();
+                        try {
+                            arrangement.deleteArrangement(j.toLowerCase());
+                        } catch (SQLException sqlEx) {
+                            sqlEx.printStackTrace();
+                        }
+                        break;
+                    case "4":
+                        isChoice = true;
+                        login();
+                        break;
+                    default:
+                        System.out.println("Ikke en valgmulighed - prøv igen.");
+                        break;
+                }
             }
         } else if (menuChoice.equals("2")) {
-            System.out.println("1. Tilføj event \t 2. Rediger event \t 3. Slet event");
+            System.out.println("1. Tilføj event \t2. Rediger event \t 3. Slet event \t  4. Tilbage");
             Scanner Choice = new Scanner(System.in);
-            String eChoice = Choice.nextLine();
-            switch (eChoice) {
-                case "1":
-                    Event event = new Event();
-                    Event e = event.newEvent();
-                    Database.eventToDatabase(e,true);
-                    break;
+            boolean isChoice = false;
+            while (!isChoice) {
+                String eChoice = Choice.nextLine();
+                switch (eChoice) {
+                    case "1":
+                        Event event = new Event();
+                        Event e = event.newEvent();
+                        isChoice = true;
+                        Database.eventToDatabase(e, true);
+                        break;
 
-                case "2":
-                    System.out.println("Vælg hvilket event du vil redigere:");
-                    Event.getEvent();
-                    Scanner edit = new Scanner(System.in);
-                    String i = edit.nextLine();
-                    Database.editEventInDatabase(i);
-                    break;
+                    case "2":
+                        System.out.println("Vælg hvilket event du vil redigere:");
+                        Event.getEvent();
+                        Scanner edit = new Scanner(System.in);
+                        String i = edit.nextLine();
+                        isChoice = true;
+                        Database.editEventInDatabase(i);
+                        break;
 
 
-                case "3":
-                    System.out.println("Vælg hvilket event du vil slette:");
-                    Event.getEvent();
-                    Scanner delete = new Scanner(System.in);
-                    String j = delete.nextLine();
-                    try {
-                        Event.deleteEvent(j.toLowerCase());
-                    } catch (SQLException sqlEx) {
-                        sqlEx.printStackTrace();
-                    }
-                    break;
-                default:
-                    System.out.println("Noget gik galt");
+                    case "3":
+                        System.out.println("Vælg hvilket event du vil slette:");
+                        Event.getEvent();
+                        isChoice = true;
+                        Scanner delete = new Scanner(System.in);
+                        String j = delete.nextLine();
+                        try {
+                            Event.deleteEvent(j.toLowerCase());
+                        } catch (SQLException sqlEx) {
+                            sqlEx.printStackTrace();
+                        }
+                        break;
+                    case "4":
+                        isChoice = true;
+                        login();
+                        break;
+                    default:
+                        System.out.println("Ikke en valgmulighed - prøv igen.");
+                }
             }
         } else if (menuChoice.equals("3")) {
             Csv.exportArrangement();
