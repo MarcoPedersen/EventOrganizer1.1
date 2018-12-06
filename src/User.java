@@ -7,7 +7,6 @@ public abstract class User {
     static Statement st;
     static ResultSet rs;
 
-
     // opretter et statement til databasen
     public static void setupStatement(String query) {
         try {
@@ -17,5 +16,4 @@ public abstract class User {
             sqlEx.printStackTrace();
         }
     }
-
 }

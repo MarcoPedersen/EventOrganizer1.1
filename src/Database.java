@@ -114,8 +114,7 @@ public class Database {
 
             Arrangement a = arrangement.newArrangement();
 
-            String sql =    "UPDATE `arrangement` SET `aName`='"+ a.getName() + "', `aStart`='" + a.getStart() +"', `aEnd`='"+ a.getEnd() + "', `aPrice`='"
-                    + a.getPrice() + "',`attendees`='"+ a.getAttendees() + "' WHERE `aName`='"+ i +"'";
+            String sql =    "UPDATE `arrangement` SET `aName`='"+ a.getName() + "', `aStart`='" + a.getStart() +"', `aEnd`='"+ a.getEnd() + "', `attendees`='"+ a.getAttendees() + "' WHERE `aName`='"+ i +"'";
 
             st = Database.getConnect().createStatement();
             st.executeUpdate(sql);
